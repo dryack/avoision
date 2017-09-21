@@ -10,6 +10,7 @@ chrome.webRequest.onBeforeRequest.addListener(
                 "*://wapo.com/*",
                 "*://arstechnica.com/*",
                 "*://buzzfeed.com/*",
+                "*://*.nytimes.com/*",
                 "*://cnn.com/*"
         ]
     },
