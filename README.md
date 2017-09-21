@@ -4,5 +4,5 @@
 I prefer to call it avoision - because some websites are egregious.
 
 In day to day life we vote with our wallets, but the online world is a different place.  We vote with our clicks.
-Avoision: A configurable (Real Soon Now(TM), and free add-on for your browser gives you the power to take back
+Avoision: A configurable (Real Soon Now™), and free add-on for your browser gives you the power to take back
 control... or whatever... be a minor irritation while *feeling* like you have some power.
