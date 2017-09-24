@@ -27,22 +27,35 @@ function archiveUrlConstructor(url){
     // possibly a combination where the user can configure websites they know of...  { "website"
     var pjmedia_singlepage = '?singlepage=true'; // avoid the irritating More button
     var pjmediaRegex = new RegExp(/(pjmedia\.com)/); // detect we're on pjmedia site
-    var amazonReferralRegex = new RegExp(/(amazon\.com.*tag=)/);
-    // TODO need to avoid this sort of shit as well:
-    // https://www.amazon.com/Social-Justice-Warrior-Handbook/dp/1682614794?&_encoding=UTF8&tag=drhelenblog-20&linkCode=ur2&linkId=4e47f4a0dda35da042a8a009a844c95e&camp=1789&creative=9325
-
-
+    var amazonReferralRegex = new RegExp(/(^.*amazon\.com.*(\/ref=|tag=|-19|-20|-21|-22|-23))/);
+    var wlAmazonRegex = new RegExp(/(.*amazon\.com)/);
+    
     if(url.match(amazonReferralRegex)){
-        var finalUrl = url.split("?&_");
-        console.debug(finalUrl);
+        var finalUrl = url.split("?");
+
+        // stop the *://*amazon.com/*/ref= crap
+        if(finalUrl[0].match(/(\/ref=)/)) {
+            finalUrl = url.split("/ref=");
+            console.log("finalUrl.match() '/ref='");
+            console.info(finalUrl);
+        }
+
+        console.info(finalUrl);
         return { redirectUrl: finalUrl[0] }; //FIXME appears to be falling through
-    } else if(url.match(pjmediaRegex)){
-        console.debug("hitting pjmedia");
+    }   // amazon de-referral
+
+    if(url.match(pjmediaRegex)) {
+        console.info("hitting pjmedia");
         return {redirectUrl: archiver + url + pjmedia_singlepage};
-    } else {
-        console.debug("hitting standard archiver build");
-        return { redirectUrl: archiver + url };
-    }
+    } // avoid pjmedia More button bullshit
+
+    if(url.match(wlAmazonRegex)) { //TODO can probably be handled at the onBeforeRequest filter stage above
+        return url;
+    } // stop fucking with 'normal' amazon pages
+
+    // send to archiver
+    console.info("hitting standard archiver build");
+    return {redirectUrl: archiver + url};  //FIXME amazon is borked when coming from archiver page - haven't examined the logic to think about this yet
 }
 // FEATURE Configure preferred archiver
 
@@ -53,5 +66,4 @@ function archiveUrlConstructor(url){
 
 // FEATURE (doubtful) look for alternate links for youtube vids
 // even if possible without more pain than i'm willing to accept, starting to go outside the original scope i'd intended
-
 
