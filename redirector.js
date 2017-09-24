@@ -29,13 +29,7 @@ function archiveUrlConstructor(url){
     var pjmediaRegex = new RegExp(/(pjmedia\.com)/); // detect we're on pjmedia site
     var amazonReferralRegex = new RegExp(/(^.*amazon\.com.*(\/ref=|tag=|-19|-20|-21|-22|-23))/);
     var wlAmazonRegex = new RegExp(/(.*amazon\.com)/);
-
-
-    // TODO need to avoid this sort of shit as well:
-    // https://www.amazon.com/Social-Justice-Warrior-Handbook/dp/1682614794?&_encoding=UTF8&tag=drhelenblog-20&linkCode=ur2&linkId=4e47f4a0dda35da042a8a009a844c95e&camp=1789&creative=9325
-    // https://smile.amazon.com/dp/B01N9P2QQF?ref_=imdbref_tt_wbr_aiv&tag=imdbtag_tt_wbr_aiv-20
-    // https://www.amazon.com/gp/product/1607747308/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1607747308&linkCode=as2&tag=drhelenblog-20&linkId=b8ef1420e5fb3d29a12eee2a2bcff7da
-
+    
     if(url.match(amazonReferralRegex)){
         var finalUrl = url.split("?");
 
