@@ -91,6 +91,14 @@ chrome.webRequest.onBeforeRequest.addListener(
                 "*://*.wehuntedthemammoth.com/*",
                 "*://*.wired.com/*",
                 "*://*.houstonpress.com/*",
+                "*://*.sfist.com/*",
+                "*://*.laist.com/*",
+                "*://*.gothamist.com/*",
+                "*://*.worldstarhiphop.com/*",
+                "*://*.latimes.com/*",
+                "*://*.sfgate.com/*",
+                "*://*.sfchronicle.com/*",
+                "*://*.seattlepi.com/*",
                 "*://*.cnn.com/*"
         ]
     },
