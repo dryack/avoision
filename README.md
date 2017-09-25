@@ -12,7 +12,7 @@ control... or whatever... be a minor irritation while *feeling* like you have so
 ## features
 
 * intercepts requests to sites that you don't want to support and redirects to a MementoWeb API supporting web archiver
-(currently limited to hardcoded and very short list of sites that are NOT carefully curated)
+(currently limited to hardcoded and not too short list of sites that is NOT carefully curated)
 * detects amazon referral links and cleans them up
 
 ## planned
