@@ -43,7 +43,7 @@ A - No.  While it's not the world as I'd like it to be, the power gradient betwe
 
 tl;dr:  If they want to set up a paywall, and stop preying upon our lives, I'll simply stop consuming their crap entirely.  Otherwise, I have no problem turning the tables in this tiny manner.
 
-Q - _You must be a dirty communist|conservative|Republican|Democrat|heathen|misogynist|misandrist|racist|druggy|Islamophobe|colonialist|etc scumbag!<br>
+Q - _You must be a dirty communist|conservative|Republican|Democrat|heathen|misogynist|misandrist|racist|druggy|Islamophobe|colonialist|etc scumbag!_<br>
 A - You're wrong.  But if you're asking, chances are I'm opposed to you and your belief system.
 
 Q - _You must be one of us!_<br>
