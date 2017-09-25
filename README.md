@@ -23,7 +23,7 @@ control... or whatever... be a minor irritation while *feeling* like you have so
 ## faq
 
 Q - _I'd like to argue over the inclusion or exclusion of a website._<br>
-A - Feel free to send me your argument(s), I'll be happy to read them and think about.  I won't reply unless I have clarifying questions.  If I agree with you, there will be a change in the default configuration.
+A - Feel free to send me your argument(s), I'll be happy to read them and think about them.  I won't reply unless I have clarifying questions.  If I agree with you, there will be a change in the default configuration.
 
 Q - _Don't you think it's immoral|unethical to steal someone's content or otherwise deprive the content creator(s) of a reasonable chance at income?_<br>
 A - No.  White it's not the world as I'd like it to be, the power gradient between internet providers and content creators has grown dangerous to the public well-being and liberty.  These companies have come to believe that there should be no constraints upon them, as they are not state actors.  Despite the protections and subsidies afforded the industry by the state, the claim to be at once acting upon the legitimate and necessary profit motive, as well as, in many cases, a nebulous "duty" to form and change the opinions of the public.  They are happy to manipulate us, pursue, collate, and sell our private lives and data, while claiming the crony-capitalist system they've corrupted should just do something.
