@@ -19,8 +19,22 @@ control... or whatever... be a minor irritation while *feeling* like you have so
 
 * configurability via text file
 * ability to whitelist amazon referral links
+* firefox version
+
+## installation
+
+_It's unlikely I'll ever submit this to google or mozilla; I don't trust them in any sense of the word._
+
+1. Download [manifest.json](../master/manifest.json) and [redirector.js](../master/manifest.json) to a folder
+2. Point your browser to chrome://extensions
+3. Ensure you're in developer mode
+4. Click on "Load unpacked extension"
+5. Select the folder where you saved the files listed above
 
 ## faq
+
+Q - I'd like you to add <feature>
+A - Don't make me code in Javascript.  Or go ahead and let me know.  I'm not saying it couldn't happen.
 
 Q - _I'd like to argue over the inclusion or exclusion of a website._<br>
 A - Feel free to send me your argument(s), I'll be happy to read them and think about them.  I won't reply unless I have clarifying questions.  If I agree with you, there will be a change in the default configuration.
@@ -30,7 +44,7 @@ A - No.  While it's not the world as I'd like it to be, the power gradient betwe
 
 tl;dr:  If they want to set up a paywall, and stop preying upon our lives, I'll simply stop consuming their crap entirely.  Otherwise, I have no problem turning the tables in this tiny manner.
 
-Q - _You must be a dirty communist|conservative|Republican|Democrat|heathen|misogynist|misandrist|racist|druggy|Islamophobe|colonialist|etc scumbag!<br>_
+Q - _You must be a dirty communist|conservative|Republican|Democrat|heathen|misogynist|misandrist|racist|druggy|Islamophobe|colonialist|etc scumbag!<br>
 A - You're wrong.  But if you're asking, chances are I'm opposed to you and your belief system.
 
 Q - _You must be one of us!_<br>
@@ -40,3 +54,6 @@ Q - _Well then what's the point of doing this?  or What's the point of blacklist
 A - I'm not comfortable with being manipulated by advertisers and content creators.  I'm not happy with the threat to free-speech and free-inquiry represented by today's online media.  I'm sickened by the amount of lying and half-truths we see in the news today.  I don't like extremists.  Each of these websites has specifically pissed me off at one time or another, in an ethical or political way - this tool ameliorates some small part of my addiction to the online media - and how negative I feel when I see myself visiting or sharing their webpages.  I don't like politics in my entertainment; I don't like entertainment in my current affairs; I don't like being told I'm <insert insult> by people who don't know me and have no basis to judge.  Clickbait is cancerous, but I'm pretty addicted.
 
 In any case, my political beliefs are subject to constant introspection and adjustment, if I were to simply limit myself only to sites that don't upset me, I would never be exposed to challenging ideas.  While that appears to be good enough for many, it's not good enough for me.  I hope it's not good enough for you either.
+
+Q - Your extension broke my browser|OS|computer|mind
+A - As my co-worker used to say:  idontbelieveyou.gif.  Also the (poorly written) source code is available for you here.  If you downloaded this extension _anyplace_ other than here, you were swindled my friend.
