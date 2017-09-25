@@ -5,9 +5,9 @@
 
   "short_name": "avoision",
 
-  "description": "I prefer to call it avoision - redirects the site of bad actors to a web archive, so you can read their clickbait without supporting them",
+  "description": "I prefer to call it avoision - redirects the site of bad actors to a web archive, so you can read their clickbait or biases without supporting them",
 
-  "version": "0.0.3",
+  "version": "0.1.2",
 
   "background": {
     "persistent": true,
