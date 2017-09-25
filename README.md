@@ -33,7 +33,7 @@ _It's unlikely I'll ever submit this to google or mozilla; I don't trust them in
 
 ## faq
 
-Q - I'd like you to add <feature>
+Q - I'd like you to add \<feature>.<br>
 A - Don't make me code in Javascript.  Or go ahead and let me know.  I'm not saying it couldn't happen.
 
 Q - _I'd like to argue over the inclusion or exclusion of a website._<br>
@@ -55,5 +55,5 @@ A - I'm not comfortable with being manipulated by advertisers and content creato
 
 In any case, my political beliefs are subject to constant introspection and adjustment, if I were to simply limit myself only to sites that don't upset me, I would never be exposed to challenging ideas.  While that appears to be good enough for many, it's not good enough for me.  I hope it's not good enough for you either.
 
-Q - Your extension broke my browser|OS|computer|mind
+Q - Your extension broke my browser|OS|computer|mind.<br>
 A - As my co-worker used to say:  idontbelieveyou.gif.  Also the (poorly written) source code is available for you here.  If you downloaded this extension _anyplace_ other than here, you were swindled my friend.
