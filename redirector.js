@@ -115,6 +115,7 @@ chrome.webRequest.onBeforeRequest.addListener(
                 "*://*.sfgate.com/*",
                 "*://*.sfchronicle.com/*",
                 "*://*.seattlepi.com/*",
+                "*://*.nypost.com/*",
                 "*://*.cnn.com/*"
         ]
     },
@@ -128,10 +129,11 @@ function archiveUrlConstructor(url){
     // possibly a combination where the user can configure websites they know of...  { "website"
     var pjmedia_singlepage = '?singlepage=true'; // avoid the irritating More button
     var pjmediaRegex = new RegExp(/(pjmedia\.com)/); // detect we're on pjmedia site
-    var amazonReferralRegex = new RegExp(/(^.*amazon\.com.*(tag=|-19|-20|-21|-22|-23))/);
+    var amazonReferralRegex = new RegExp(/(^.*amazon\.com.*(\/ref=|tag=|-19|-20|-21|-22|-23))/);
     var wlAmazonRegex = new RegExp(/(.*amazon\.com)/);
     
     if(url.match(amazonReferralRegex)){
+        // FIXME there are still various amazon issues involving search references
         var finalUrl = url.split("?");
 
         // FIXME too aggressive, might need to go away permanently...
