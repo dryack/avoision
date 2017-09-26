@@ -128,7 +128,7 @@ function archiveUrlConstructor(url){
     // possibly a combination where the user can configure websites they know of...  { "website"
     var pjmedia_singlepage = '?singlepage=true'; // avoid the irritating More button
     var pjmediaRegex = new RegExp(/(pjmedia\.com)/); // detect we're on pjmedia site
-    var amazonReferralRegex = new RegExp(/(^.*amazon\.com.*(\/ref=|tag=|-19|-20|-21|-22|-23))/);
+    var amazonReferralRegex = new RegExp(/(^.*amazon\.com.*(tag=|-19|-20|-21|-22|-23))/);
     var wlAmazonRegex = new RegExp(/(.*amazon\.com)/);
     
     if(url.match(amazonReferralRegex)){
@@ -163,7 +163,7 @@ function archiveUrlConstructor(url){
 
 // FEATURE Flag(?) to avoid amazon referrers
 
-// FEATURE allow whitelisting amazon refferers
+// FEATURE allow whitelisting amazon referrers
 // assume referrers should be stopped
 
 // FEATURE (doubtful) look for alternate links for youtube vids
