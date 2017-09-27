@@ -29,7 +29,6 @@ chrome.webRequest.onBeforeRequest.addListener(
                 "*://*.buzzfeed.com/*",
                 "*://*.nytimes.com/*",
                 "*://*.pjmedia.com/*",
-                "*://*.amazon.com/*",
                 "*://*.foxnews.com/*",
                 "*://*.heatst.com/*",
                 "*://*.dailykos.com/*",
@@ -118,44 +117,40 @@ chrome.webRequest.onBeforeRequest.addListener(
                 "*://*.nypost.com/*",
                 "*://*.cnn.com/*",
                 "*://*.powerlineblog.com/*",
-                "*://*.mu.nu/*"
+                "*://*.mu.nu/*",
+                "*://*.amazon.com/*tag=*"
         ]
     },
-    ['blocking']
+    ['blocking'] // don't let the request go until we get back a redirectUrl (or other return in theory)
 );
 
 // Build the archive.is request url
 function archiveUrlConstructor(url){
-    var archiver = 'https://archive.is/?run=1&url=';
     // TODO do i want to leave this stuff hardcoded for ease of use, or do I want to make it configurable per website?
-    // possibly a combination where the user can configure websites they know of...  { "website"
+    // possibly a combination where the user can configure websites they know of...
+    // meh, probably not really a possible in the way i thought
+    var archiver = 'https://archive.is/?run=1&url=';
+    // pjmedia crap
     var pjmedia_singlepage = '?singlepage=true'; // avoid the irritating More button
     var pjmediaRegex = new RegExp(/(pjmedia\.com)/); // detect we're on pjmedia site
-    var amazonReferralRegex = new RegExp(/(^.*amazon\.com.*(tag=|-19|-20|-21|-22|-23))/);
-    var wlAmazonRegex = new RegExp(/(.*amazon\.com)/);
-    
-    if(url.match(amazonReferralRegex)){
+    // amazon crap
+    var amazonReferralRegex = new RegExp(/(^.*amazon\.com.*(-19|-20|-21|-22|-23))/); // watching for referral links
+
+    // decide how to build redirectUrl
+    if(url.match(amazonReferralRegex)){ // amazon de-referral
         var finalUrl = url.split("?");
 
         console.info(finalUrl);
-        return { redirectUrl: finalUrl[0] }; //FIXME appears to be falling through
-    }   // amazon de-referral
+        return { redirectUrl: finalUrl[0] };
+    }
 
-    if(url.match(pjmediaRegex)) {
-        console.info("hitting pjmedia");
+    if(url.match(pjmediaRegex)) { // avoid pjmedia More button bullshit
         return {redirectUrl: archiver + url + pjmedia_singlepage};
-    } // avoid pjmedia More button bullshit
+    }
 
-    if(url.match(wlAmazonRegex)) { //TODO can probably be handled at the onBeforeRequest filter stage above
-        return url;
-    } // stop fucking with 'normal' amazon pages
-
-    // send to archiver
-    console.info("hitting standard archiver build");
+    // fallthrough option so to speak - our basic use
     return {redirectUrl: archiver + url};  //FIXME amazon is borked when coming from archiver page - haven't examined the logic to think about this yet
 }
-// FEATURE Configure preferred archiver
-
 // FEATURE Flag(?) to avoid amazon referrers
 
 // FEATURE allow whitelisting amazon referrers
