@@ -115,7 +115,10 @@ chrome.webRequest.onBeforeRequest.addListener(
                 "*://*.sfgate.com/*",
                 "*://*.sfchronicle.com/*",
                 "*://*.seattlepi.com/*",
-                "*://*.cnn.com/*"
+                "*://*.nypost.com/*",
+                "*://*.cnn.com/*",
+                "*://*.powerlineblog.com/*",
+                "*://*.mu.nu/*"
         ]
     },
     ['blocking']
@@ -133,14 +136,6 @@ function archiveUrlConstructor(url){
     
     if(url.match(amazonReferralRegex)){
         var finalUrl = url.split("?");
-
-        // FIXME too aggressive, might need to go away permanently...
-        // stop the *://*amazon.com/*/ref= crap
-        //if(finalUrl[0].match(/(\/ref=)/)) {
-        //    finalUrl = url.split("/ref=");
-        //    console.log("finalUrl.match() '/ref='");
-        //    console.info(finalUrl);
-        //}
 
         console.info(finalUrl);
         return { redirectUrl: finalUrl[0] }; //FIXME appears to be falling through
