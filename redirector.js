@@ -126,26 +126,29 @@ chrome.webRequest.onBeforeRequest.addListener(
 
 // Build the archive.is request url
 function archiveUrlConstructor(url){
-    var archiver = 'https://archive.is/?run=1&url=';
     // TODO do i want to leave this stuff hardcoded for ease of use, or do I want to make it configurable per website?
     // possibly a combination where the user can configure websites they know of...
     // meh, probably not really a possible in the way i thought
+    var archiver = 'https://archive.is/?run=1&url=';
+    // pjmedia crap
     var pjmedia_singlepage = '?singlepage=true'; // avoid the irritating More button
     var pjmediaRegex = new RegExp(/(pjmedia\.com)/); // detect we're on pjmedia site
+    // amazon crap
     var amazonReferralRegex = new RegExp(/(^.*amazon\.com.*(-19|-20|-21|-22|-23))/); // watching for referral links
-    
-    if(url.match(amazonReferralRegex)){
+
+    // decide how to build redirectUrl
+    if(url.match(amazonReferralRegex)){ // amazon de-referral
         var finalUrl = url.split("?");
 
         console.info(finalUrl);
         return { redirectUrl: finalUrl[0] };
-    }   // amazon de-referral
+    }
 
-    if(url.match(pjmediaRegex)) {
+    if(url.match(pjmediaRegex)) { // avoid pjmedia More button bullshit
         return {redirectUrl: archiver + url + pjmedia_singlepage};
-    } // avoid pjmedia More button bullshit
+    }
 
-    // send to archiver
+    // fallthrough option so to speak - our basic use
     return {redirectUrl: archiver + url};  //FIXME amazon is borked when coming from archiver page - haven't examined the logic to think about this yet
 }
 // FEATURE Flag(?) to avoid amazon referrers
