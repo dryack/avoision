@@ -116,7 +116,9 @@ chrome.webRequest.onBeforeRequest.addListener(
                 "*://*.sfchronicle.com/*",
                 "*://*.seattlepi.com/*",
                 "*://*.nypost.com/*",
-                "*://*.cnn.com/*"
+                "*://*.cnn.com/*",
+                "*://*.powerlineblog.com/*",
+                "*://*.mu.nu/*"
         ]
     },
     ['blocking']
