@@ -149,7 +149,7 @@ function archiveUrlConstructor(url){
     }
 
     // fallthrough option so to speak - our basic use
-    return {redirectUrl: archiver + url};  //FIXME amazon is borked when coming from archiver page - haven't examined the logic to think about this yet
+    return {redirectUrl: archiver + url};
 }
 // FEATURE Flag(?) to avoid amazon referrers
 
