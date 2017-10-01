@@ -118,6 +118,7 @@ chrome.webRequest.onBeforeRequest.addListener(
                 "*://*.cnn.com/*",
                 "*://*.powerlineblog.com/*",
                 "*://*.mu.nu/*",
+                "*://*.bloomberg.com/*",
                 "*://*.amazon.com/*tag=*"
         ]
     },
@@ -138,18 +139,27 @@ function archiveUrlConstructor(url){
 
     // decide how to build redirectUrl
     if(url.match(amazonReferralRegex)){ // amazon de-referral
-        var finalUrl = url.split("?");
 
-        console.info(finalUrl);
-        return { redirectUrl: finalUrl[0] };
+        // if there's an ASIN available, let's just extract it and build the most basic possible URL without further
+        // processing
+        if(url.match(/&creativeASIN=\w{10}(&|$)/)) {
+            var finalLocation = url.substr(url.search(/&creativeASIN=\w{10}(&|$)/)+14,10);
+            return { redirectUrl: "https://amazon.com/dp/" + finalLocation };
+        }
+        // in other cases just strip out all the crap
+        var finalUrl = url.replace(/(tag=\w+(-19|-20|-21|-22|-23)(&|$))|(linkCode=\w+(&|$))|(creative=\w+(&|$))|(linkId=\w+(&|$))|(camp=\w+(&|$))/g,'');
+        console.debug(finalUrl);
+        // TODO all the various amazon url references can pretty much be stripped as well - but there's alot of
+        // experimenting to do in order to get that running
+        return { redirectUrl: finalUrl };
     }
 
     if(url.match(pjmediaRegex)) { // avoid pjmedia More button bullshit
-        return {redirectUrl: archiver + url + pjmedia_singlepage};
+        return { redirectUrl: archiver + url + pjmedia_singlepage };
     }
 
     // fallthrough option so to speak - our basic use
-    return {redirectUrl: archiver + url};
+    return { redirectUrl: archiver + url };
 }
 // FEATURE Flag(?) to avoid amazon referrers
 
@@ -159,3 +169,4 @@ function archiveUrlConstructor(url){
 // FEATURE (doubtful) look for alternate links for youtube vids
 // even if possible without more pain than i'm willing to accept, starting to go outside the original scope i'd intended
 
+// FEATURE support http://unvis.it/
