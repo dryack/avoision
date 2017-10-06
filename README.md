@@ -17,6 +17,7 @@ control... or whatever... be a minor irritation while *feeling* like you have so
 ## planned
 
 * configurability via text file
+* detect and remove non-amazon affiliate links as I find them
 * ability to whitelist amazon referral links
 * firefox version
 
