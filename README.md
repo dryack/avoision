@@ -11,7 +11,7 @@ control... or whatever... be a minor irritation while *feeling* like you have so
 
 ## features
 
-* intercepts requests to sites that you don't want to support and redirects to a MementoWeb API supporting web archiver (defaulting to archive.is at this time)
+* intercepts requests to sites that you don't want to support and redirects to a MementoWeb API supporting web archiver (defaulting to archive.is, which you should totally [donate](https://liberapay.com/archiveis) to if you find this project useful)
 * detects amazon referral links and cleans them up
 
 ## planned
