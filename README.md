@@ -33,11 +33,11 @@ _It's unlikely I'll ever submit this to google or mozilla; I don't trust them in
 
 ## faq
 
-Q - I'd like you to add \<feature>.<br>
-A - Don't make me code in Javascript.  Or go ahead and let me know.  I'm not saying it couldn't happen.
+Q - _I'd like you to add \<feature>._<br>
+A - Don't make me code in Javascript.  Or go ahead and fill out an issue.  I'm not saying it couldn't happen.
 
 Q - _I'd like to argue over the inclusion or exclusion of a website._<br>
-A - Feel free to send me your argument(s), I'll be happy to read them and think about them.  I won't reply unless I have clarifying questions.  If I agree with you, there will be a change in the default configuration.
+A - Feel free to send me your argument by opening an issue, I'll be happy to read them and think about them.  I won't reply unless I have clarifying questions.  If I agree with you, there will be a change in the default configuration.
 
 Q - _Don't you think it's immoral|unethical to steal someone's content or otherwise deprive the content creator(s) of a reasonable chance at income?_<br>
 A - No.  While it's not the world as I'd like it to be, the power gradient between internet providers and content creators has grown dangerous to the public well-being and liberty.  These companies have come to believe that there should be no constraints upon them, as they are not state actors.  Despite the protections and subsidies afforded the industry by the state, they claim to be at once acting upon the legitimate and necessary profit motive, as well as, in many cases, a nebulous "duty" to form and change the opinions of the public.  They are happy to manipulate us; to pursue, collate, and sell our private lives and data.  They do this while also claiming the crony-capitalist system they've helped to corrupt is at fault.  There's a totalitarian or statist impulse behind so much content today.  It leaves me cold.
