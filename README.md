@@ -23,13 +23,24 @@ control... or whatever... be a minor irritation while *feeling* like you have so
 
 ## installation
 
-_It's unlikely I'll ever submit this to google or mozilla; I don't trust them in any sense of the word._
+_It's unlikely I'll ever submit this to google or mozilla; I don't trust them._
 
+##### Chromium-based browsers
 1. Download [manifest.json](../master/manifest.json) and [redirector.js](../master/manifest.json) to a folder
 2. Point your browser to chrome://extensions
 3. Ensure you're in developer mode
 4. Click on "Load unpacked extension"
 5. Select the folder where you saved the files listed above
+
+##### Mozilla-based browser
+1. Download [manifest.json](../master/manifest.json) and [redirector.js](../master/manifest.json) to a folder
+2. Archive the files in a ZIP file with extension .zip or .xpi 
+3. Open the menu, select Add-ons
+4. Click on the gear
+5. Select _Install Add-on from file..._
+6. Open the ZIP file and watch as Firefox refuses to install it - I prefer [Waterfox](https://www.waterfoxproject.org/) anyway
+
+(I hear that it might work in greasemonkey on Firefox, but haven't tried it myself)
 
 ## faq
 
