@@ -7,11 +7,20 @@
 
   "description": "I prefer to call it avoision - redirects the site of bad actors to a web archive, so you can read their clickbait or biases without supporting them",
 
-  "version": "0.1.10",
+  "version": "0.2.0",
 
   "background": {
     "persistent": true,
-    "scripts": ["redirector.js"]
+    "scripts": ["background.js", "redirector.js"]
+  },
+
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon16.png",
+      "24": "images/icon24.png",
+      "32": "images/icon32.png"
+    },
+    "default_title": "Avoision"
   },
 
   "permissions": [

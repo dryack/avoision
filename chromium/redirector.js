@@ -10,7 +10,6 @@
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //  GNU Affero General Public License for more details.
-
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>
 
@@ -18,6 +17,7 @@
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         var url = details.url;
+        if(filter_list_state === 1) { return }
 
         return archiveUrlConstructor(url);
     },
@@ -137,6 +137,20 @@ chrome.webRequest.onBeforeRequest.addListener(
                 "*://*.victorygirlsblog.com/*",
                 "*://*.althouse.blogspot.com/*",
                 "*://*.classicalvalues.com/*",
+                "*://*.businessinsider.com/*",
+                "*://*.eastbaytimes.com/*",
+                "*://*.eastbaytimes.com/*",
+                "*://*.xojane.com/*",
+                "*://*.cassiuslife.com/*",
+                "*://*.yournewswire.com/*",
+                "*://*.balkin.blogspot.com/*",
+                "*://*.newsbusters.org/*",
+                "*://*.therpgpundit.blogspot.com/*",
+                "*://*.townhall.com/*",
+                "*://*.spiked-online.com/*",
+                "*://*.cnbc.com/*",
+                "*://*.nationalreview.com/*",
+                "*://*.theamericanconservative.com/*",
                 "*://*.amazon.com/*tag=*"
         ]
     },
