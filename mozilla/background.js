@@ -12,4 +12,3 @@ function toggleFilterlist() {
     }
 }
 chrome.browserAction.onClicked.addListener(toggleFilterlist);
-toggleFilterlist();
