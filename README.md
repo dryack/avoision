@@ -19,21 +19,20 @@ control... or whatever... be a minor irritation while *feeling* like you have so
 * configurability via text file
 * detect and remove non-amazon affiliate links as I find them
 * ability to whitelist amazon referral links
-* firefox version
 
 ## installation
 
 _It's unlikely I'll ever submit this to google or mozilla; I don't trust them._
 
 ##### Chromium-based browsers
-1. Download [manifest.json](../master/manifest.json) and [redirector.js](../master/manifest.json) to a folder
+1. Download [chromium](https://github.com/dryack/avoision/tree/master/chromium) folder to a convenient location
 2. Point your browser to chrome://extensions
 3. Ensure you're in developer mode
 4. Click on "Load unpacked extension"
 5. Select the folder where you saved the files listed above
 
 ##### Mozilla-based browser
-1. Download [manifest.json](../master/manifest.json) and [redirector.js](../master/manifest.json) to a folder
+1. Download [manifest.json](https://github.com/dryack/avoision/tree/master/mozilla) folder to a convenient location
 2. Archive the files in a ZIP file with extension .zip or .xpi 
 3. Open the menu, select Add-ons
 4. Click on the gear
