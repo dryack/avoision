@@ -18,6 +18,7 @@
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         var url = details.url;
+        if(filter_list_state === 1) { return }
 
         return archiveUrlConstructor(url);
     },

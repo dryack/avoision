@@ -11,7 +11,7 @@
 
   "background": {
     "persistent": true,
-    "scripts": ["redirector.js"]
+    "scripts": ["background.js", "redirector.js"]
   },
 
   "browser_action": {
