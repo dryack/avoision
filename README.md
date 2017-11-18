@@ -32,7 +32,7 @@ _It's unlikely I'll ever submit this to google or mozilla; I don't trust them._
 5. Select the folder where you saved the files listed above
 
 ##### Mozilla-based browser
-1. Download [manifest.json](https://github.com/dryack/avoision/tree/master/mozilla) folder to a convenient location
+1. Download [mozilla](https://github.com/dryack/avoision/tree/master/mozilla) folder to a convenient location
 2. Archive the files in a ZIP file with extension .zip or .xpi 
 3. Open the menu, select Add-ons
 4. Click on the gear
