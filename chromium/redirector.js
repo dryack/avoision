@@ -13,6 +13,34 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>
 
+chrome.webRequest.onBeforeRequest.addListener(
+    function(details) {
+        var url = details.url;
+
+        return strippedUrlConstructor(url);
+    },
+    {
+        urls: ["<all_urls>"]
+    },
+    ['blocking']
+);
+
+function strippedUrlConstructor(url){
+    //adapted from https://github.com/jparise/chrome-utm-stripper because i'm lazy
+    var utm_re = new RegExp('([\?\&]utm_(source|medium|term|campaign|content|cid|reader|name)=[^&#]+)', 'ig');
+    var queryStringIndex = url.indexOf('?');
+    if (url.indexOf('utm_') > queryStringIndex) {
+        var stripped = url.replace(utm_re, '');
+        if (stripped.charAt(queryStringIndex) === '&') {
+            stripped = stripped.substr(0, queryStringIndex) + '?' +
+                stripped.substr(queryStringIndex + 1)
+        }
+        if (stripped !== url) {
+            return {redirectUrl: stripped};
+        }
+    }
+}
+
 // Catch requests before the browser sends them
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
@@ -151,6 +179,7 @@ chrome.webRequest.onBeforeRequest.addListener(
                 "*://*.cnbc.com/*",
                 "*://*.nationalreview.com/*",
                 "*://*.theamericanconservative.com/*",
+                "*://*.clickhole.com/*",
                 "*://*.amazon.com/*tag=*"
         ]
     },
