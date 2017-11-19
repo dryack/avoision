@@ -8,6 +8,7 @@ function toggleFilterlist() {
     }
     if (filter_list_state === 1) {
         filter_list_state = 0;
+        chrome.browserAction.setBadgeText( {text: ""});
         return
     }
 }
