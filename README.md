@@ -32,12 +32,11 @@ _It's unlikely I'll ever submit this to google or mozilla; I don't trust them._
 5. Select the folder where you saved the files listed above
 
 ##### Mozilla-based browser
-1. Download [mozilla](https://github.com/dryack/avoision/tree/master/mozilla) folder to a convenient location
-2. Archive the files in a ZIP file with extension .zip or .xpi 
-3. Open the menu, select Add-ons
-4. Click on the gear
-5. Select _Install Add-on from file..._
-6. Open the ZIP file and watch as Firefox refuses to install it - I prefer [Waterfox](https://www.waterfoxproject.org/) anyway
+1. Download [avoision.zip](https://github.com/dryack/avoision/blob/master/mozilla/avoision.zip) to a convenient location
+2. Open the menu, select Add-ons
+3. Click on the gear
+4. Select _Install Add-on from file..._
+5. Open the ZIP file and watch as Firefox refuses to install it - I prefer [Waterfox](https://www.waterfoxproject.org/) anyway
 
 (I hear that it might work in greasemonkey on Firefox, but haven't tried it myself)
 
