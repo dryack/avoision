@@ -167,6 +167,7 @@ chrome.webRequest.onBeforeRequest.addListener(
                 "*://*.dictionary.com/*",
                 "*://*.thesaurus.com/*",
                 "*://*.xkcd.com/*",
+                "*://*.clickhole.com/*",
                 "*://*.amazon.com/*tag=*"
         ]
     },
