@@ -24,7 +24,8 @@ function sendToArchiver(info) {
 
 function sendViaVia(info) {
     var archiver = 'https://archive.is/?run=1&url=https://via.hypothes.is/';
-    var url = archiver + info.pageUrl.replace(/(http|https):\/\//, '');
+    var url = archiver + info.pageUrl;
+
     chrome.tabs.create({
         url: url,
         active: true
@@ -33,7 +34,8 @@ function sendViaVia(info) {
 
 function sendViaUnvis(info) {
     var archiver = 'https://archive.is/?run=1&url=https://unv.is/';
-    var url = archiver + info.pageUrl;
+    var url = archiver + info.pageUrl.replace(/(http|https):\/\//, '');
+
     chrome.tabs.create({
         url: url,
         active: true
