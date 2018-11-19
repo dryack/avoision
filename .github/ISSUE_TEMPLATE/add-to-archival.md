@@ -1,7 +1,7 @@
 ---
 name: Add to Archival
 about: Request to add a site to archival
-labels: add_to_archiving
+labels: 
 
 ---
 
