@@ -1,4 +1,4 @@
-//  avosion - Lightweight browser redirector for those who are addicted to the web of ideas
+//  avoision - Lightweight browser redirector for those who are addicted to the web of ideas
 //  Copyright (C) 2017-2018 David Ryack
 //
 //  This program is free software: you can redistribute it and/or modify
