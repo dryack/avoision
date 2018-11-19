@@ -5,11 +5,11 @@ labels:
 
 ---
 
-h2. Base URL
+## Base URL
 *(examples: "nbcnews.com", "yahoo.com/news/")*
 
-h3. Rationale
+### Rationale
 *why should this site be archived?*
 
-h3. Example
+### Example
 *provide one or more links to content supporting your rationale*
