@@ -1,4 +1,4 @@
-//  avosion - Lightweight browser redirector for those who are addicted to the web of ideas
+//  avoision - Lightweight browser redirector for those who are addicted to the web of ideas
 //  Copyright (C) 2017-2018 David Ryack
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -27,7 +27,6 @@ chrome.webRequest.onBeforeRequest.addListener(
                 "*://*.wapo.com/*",
                 "*://*.arstechnica.com/*",
                 "*://*.buzzfeed.com/*",
-                "*://*.nytimes.com/*",
                 "*://*.pjmedia.com/*",
                 "*://*.foxnews.com/*",
                 "*://*.heatst.com/*",
@@ -47,7 +46,6 @@ chrome.webRequest.onBeforeRequest.addListener(
                 "*://*.newyorker.com/*",
                 "*://*.returnofkings.com/*",
                 "*://*.rollingstones.com/*",
-                "*://*.slate.com/*",
                 "*://*.telegraph.co.uk/*",
                 "*://*.yahoo.com/news/*",
                 "*://*.zerohedge.com/*",
@@ -101,10 +99,8 @@ chrome.webRequest.onBeforeRequest.addListener(
                 "*://*.themarysue.com/*",
                 "*://*.theroot.com/*",
                 "*://*.theverge.com/*",
-                "*://*.vice.com/*",
                 "*://*.vox.com/*",
                 "*://*.wehuntedthemammoth.com/*",
-                "*://*.wired.com/*",
                 "*://*.houstonpress.com/*",
                 "*://*.sfist.com/*",
                 "*://*.laist.com/*",
@@ -174,6 +170,50 @@ chrome.webRequest.onBeforeRequest.addListener(
     ['blocking'] // don't let the request go until we get back a redirectUrl (or other return in theory)
 );
 
+chrome.webRequest.onBeforeRequest.addListener(
+    function(details) {
+        var url = details.url;
+        if(filter_list_state === 1) {return}
+
+        return archiveViaConstructor(url);
+    },
+    {
+        urls: [ "*://*.slate.com/*",
+                "*://*.wired.com/*"
+        ]
+    },
+    ['blocking']
+);
+
+chrome.webRequest.onBeforeRequest.addListener(
+    function(details) {
+        var url = details.url;
+        if(filter_list_state === 1) {return}
+
+        return archiveUnvConstructor(url);
+    },
+    {
+        urls: [ "*://*.nytimes.com/*",
+                "*://*.vice.com/*"
+        ]
+    },
+    ['blocking']
+);
+
+function archiveViaConstructor(url) {
+    var archiver = 'https://archive.is/?run=1&url=https://via.hypothes.is/';
+    var finalUrl = archiver + url;
+
+    return { redirectUrl: finalUrl };
+}
+
+function archiveUnvConstructor(url) {
+    var archiver = 'https://archive.is/?run=1&url=https://unv.is/';
+    var finalUrl = archiver + url.replace(/(http|https):\/\//, '');
+
+    return { redirectUrl: finalUrl };
+}
+
 // Build the archive.is request url
 function archiveUrlConstructor(url){
     // TODO do i want to leave this stuff hardcoded for ease of use, or do I want to make it configurable per website?
@@ -207,7 +247,7 @@ function archiveUrlConstructor(url){
         return { redirectUrl: archiver + url + pjmedia_singlepage };
     }
 
-    // fallthrough option so to speak - our basic use
+     // fallthrough option so to speak - our basic use
     return { redirectUrl: archiver + url };
 }
 // FEATURE Flag(?) to avoid amazon referrers
