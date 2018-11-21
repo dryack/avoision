@@ -209,10 +209,10 @@ chrome.webRequest.onBeforeRequest.addListener(
         return archiveOutlineConstructor(url);
     },
     {
-            urls: [ "*://*.nytimes.com/*",
+        urls: [ "*://*.nytimes.com/*",
                     "*://*.slate.com/*",
                     "*://*.wired.com/*"
-            ]
+        ]
     },
     ['blocking']
 );
