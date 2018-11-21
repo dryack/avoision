@@ -202,17 +202,12 @@ chrome.webRequest.onBeforeRequest.addListener(
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         var url = details.url;
-        if (filter_list_state === 1) {
-            return
-        }
+        if (filter_list_state === 1) {return}
 
         return archiveOutlineConstructor(url);
     },
     {
-        urls: [ "*://*.nytimes.com/*",
-                    "*://*.slate.com/*",
-                    "*://*.wired.com/*"
-        ]
+        urls: [ "*://*.nytimes.com/*","*://*.slate.com/*", "*://*.wired.com/*" ]
     },
     ['blocking']
 );
