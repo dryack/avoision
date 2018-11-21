@@ -185,7 +185,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 
 // archive via unv.is
-chrome.webRequest.onBeforeRequest.addListener(
+/*chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         var url = details.url;
         if(filter_list_state === 1) {return}
@@ -196,7 +196,7 @@ chrome.webRequest.onBeforeRequest.addListener(
         urls: []
     },
     ['blocking']
-);
+);*/
 
 // archive via outline.com
 chrome.webRequest.onBeforeRequest.addListener(
