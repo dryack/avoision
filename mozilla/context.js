@@ -42,6 +42,16 @@ function sendViaUnvis(info) {
     })
 }
 
+function sendViaOutline(info) {
+    var archiver = 'https://archive.is/?run=1&url=https://outline.com/';
+    var url = archiver + info.pageUrl;
+
+    chrome.tabs.create({
+        url: url,
+        active: true
+    })
+}
+
 chrome.contextMenus.create({
     type: 'normal',
     id: 'ContextMenuAvoision',
@@ -75,4 +85,14 @@ chrome.contextMenus.create({
     parentId: 'ContextMenuAvoision',
     enabled: true,
     onclick: sendViaUnvis
+});
+
+chrome.contextMenus.create({
+    type: 'normal',
+    id: 'ContextMenuViaOutline',
+    title: 'to archive.is using outline.com',
+    parentId: 'ContextMenuAvoision',
+    visible: true,
+    enabled: true,
+    onclick: sendViaOutline
 });
