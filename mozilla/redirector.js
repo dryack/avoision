@@ -171,6 +171,7 @@ chrome.webRequest.onBeforeRequest.addListener(
     ['blocking'] // don't let the request go until we get back a redirectUrl (or other return in theory)
 );
 
+// archive via via.hypothes.is
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         var url = details.url;
@@ -179,14 +180,13 @@ chrome.webRequest.onBeforeRequest.addListener(
         return archiveViaConstructor(url);
     },
     {
-        urls: [ "*://*.slate.com/*",
-            "*://*.wired.com/*"
-        ]
+        urls: [ "*://*.vice.com/*" ]
     },
     ['blocking']
 );
 
-chrome.webRequest.onBeforeRequest.addListener(
+// archive via unv.is
+/*chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         var url = details.url;
         if(filter_list_state === 1) {return}
@@ -194,13 +194,28 @@ chrome.webRequest.onBeforeRequest.addListener(
         return archiveUnvConstructor(url);
     },
     {
+        urls: []
+    },
+    ['blocking']
+);*/
+
+// archive via outline.com
+chrome.webRequest.onBeforeRequest.addListener(
+    function(details) {
+        var url = details.url;
+        if (filter_list_state === 1) {return}
+
+        return archiveOutlineConstructor(url);
+    },
+    {
         urls: [ "*://*.nytimes.com/*",
-            "*://*.vice.com/*"
-        ]
+                "*://*.slate.com/*",
+                "*://*.wired.com/*" ]
     },
     ['blocking']
 );
 
+// build the archive.is request url using via.hypothes.is
 function archiveViaConstructor(url) {
     var archiver = 'https://archive.is/?run=1&url=https://via.hypothes.is/';
     var finalUrl = archiver + url;
@@ -208,9 +223,18 @@ function archiveViaConstructor(url) {
     return { redirectUrl: finalUrl };
 }
 
+// build the archive.is request url using unv.is
 function archiveUnvConstructor(url) {
     var archiver = 'https://archive.is/?run=1&url=https://unv.is/';
     var finalUrl = archiver + url.replace(/(http|https):\/\//, '');
+
+    return { redirectUrl: finalUrl };
+}
+
+// build the archive.is request url using outline.com
+function archiveOutlineConstructor(url) {
+    var archiver = 'https://archive.is/?run=1&url=https://outline.com/';
+    var finalUrl = archiver + url;
 
     return { redirectUrl: finalUrl };
 }
