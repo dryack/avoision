@@ -13,6 +13,94 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>
 
+const TRACKERS_BY_ROOT = {
+
+    // Google's Urchin Tracking Module
+    'utm_': [
+        'source',
+        'medium',
+        'term',
+        'campaign',
+        'content',
+        'name',
+        'cid',
+        'reader',
+        'viz_id',
+        'pubreferrer',
+        'swu'
+    ],
+
+    // Adobe Omniture SiteCatalyst
+    'IC': [
+        'ID'
+    ],
+
+    // Adobe Omniture SiteCatalyst
+    'ic': [
+        'id'
+    ],
+
+    // Hubspot
+    '_hs': [
+        'enc',
+        'mi'
+    ],
+
+    // Marketo
+    'mkt_': [
+        'tok'
+    ],
+
+    // MailChimp
+    // https://developer.mailchimp.com/documentation/mailchimp/guides/getting-started-with-ecommerce/
+    'mc_': [
+        'cid',
+        'eid'
+    ],
+
+    // comScore Digital Analytix?
+    // http://www.about-digitalanalytics.com/comscore-digital-analytix-url-campaign-generator
+    'ns_': [
+        'source',
+        'mchannel',
+        'campaign',
+        'linkname',
+        'fee'
+    ],
+
+    // Simple Reach
+    'sr_': [
+        'share'
+    ],
+
+    // Vero
+    'vero_': [
+        'conv',
+        'id'
+    ],
+
+    // Non-prefixy and 1-offs
+    '': [
+        // Facebook Click Identifier
+        // http://thisinterestsme.com/facebook-fbclid-parameter/
+        'fbclid',
+        // Google Click Identifier
+        'gclid',
+        // Some other Google Click thing
+        'ocid',
+        // Unknown
+        'ncid',
+        // Unknown
+        'nr_email_referer',
+        // Generic-ish. Facebook, Product Hunt and others
+        'ref',
+        // Alibaba-family 'super position model' tracker:
+        // https://github.com/newhouse/url-tracking-stripper/issues/38
+        'spm'
+    ]
+};
+
+
 const ViaURLS = [
     "*://*.vice.com/*",
     "*://*.nationalreview/*"
@@ -168,17 +256,27 @@ const ArchiveURLS =  [
     "*://*.amazon.com/*tag=*"
 ];
 
+// so try to build a blocking onBeforeRequest that builds the filters list for the next onBeforeRequest in line
+//var filters = {
+//    urls: ducky(),
+//    types: ["main_frame"]
+//};
+function cleaning(details){
+    var url = details.url;
+    console.debug("Details: " + details.requestId);
+    console.debug("\tDetails: " + details.url);
+    if(url.endsWith("?singlepage=true")) { return }
+
+    return cleanUrl(url);
+    // not sure I care to shut this off, but the option exists
+    //if(filter_list_state === 1) { return }
+}
 // Catch everything for cleaning urls, etc
 chrome.webRequest.onBeforeRequest.addListener(
-    function(details) {
-        var url = details.url;
-        // not sure I care to shut this off, but the option exists
-        //if(filter_list_state === 1) { return }
-
-        return cleanUrl(url);
-    },
+    cleaning,
     {
-        urls: [ "<all_urls>" ]
+        urls: generateTrackerPatternsArray(),
+        types: ["main_frame"]
     },
     ['blocking']
 );
@@ -241,15 +339,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 
 function cleanUrl(url) {
-    // pjmedia crap
-    var pjmedia_singlepage = '?singlepage=true'; // avoid the irritating More button
-    var pjmediaRegex = new RegExp(/(pjmedia\.com)/); // detect we're on pjmedia site
-
     var strippedUrl = removeTrackersFromUrl(url);
-
-    if(strippedUrl.match(pjmediaRegex)) { // avoid pjmedia More button bullshit
-        return { redirectUrl: strippedUrl + pjmedia_singlepage };
-    }
 
     return { redirectUrl: strippedUrl}
 
@@ -281,10 +371,18 @@ function archiveOutlineConstructor(url) {
 
 // Build the archive.is request url
 function archiveUrlConstructor(url){
-    // TODO do i want to leave this stuff hardcoded for ease of use, or do I want to make it configurable per website?
-    // possibly a combination where the user can configure websites they know of...
-    // meh, probably not really a possible in the way i thought
     var archiver = 'https://archive.is/?run=1&url=';
+
+    // pjmedia crap
+    var pjmedia_singlepage = '?singlepage=true'; // avoid the irritating More button
+    var pjmediaRegex = new RegExp(/(pjmedia\.com)/); // detect we're on pjmedia site
+    if(url.endsWith(pjmedia_singlepage)) {
+        return { redirectUrl: archiver + url}
+    }
+    if(url.match(pjmediaRegex)) { // avoid pjmedia More button bullshit
+
+        return { redirectUrl: archiver + url + pjmedia_singlepage };
+    }
 
      // fallthrough option so to speak - our basic use
     return { redirectUrl: archiver + url };
@@ -303,92 +401,6 @@ function archiveUrlConstructor(url){
 // shamelessly stolen from the excellent https://github.com/newhouse/url-tracking-stripper whose code I've really come
 // to admire
 
-const TRACKERS_BY_ROOT = {
-
-    // Google's Urchin Tracking Module
-    'utm_': [
-        'source',
-        'medium',
-        'term',
-        'campaign',
-        'content',
-        'name',
-        'cid',
-        'reader',
-        'viz_id',
-        'pubreferrer',
-        'swu'
-    ],
-
-    // Adobe Omniture SiteCatalyst
-    'IC': [
-        'ID'
-    ],
-
-    // Adobe Omniture SiteCatalyst
-    'ic': [
-        'id'
-    ],
-
-    // Hubspot
-    '_hs': [
-        'enc',
-        'mi'
-    ],
-
-    // Marketo
-    'mkt_': [
-        'tok'
-    ],
-
-    // MailChimp
-    // https://developer.mailchimp.com/documentation/mailchimp/guides/getting-started-with-ecommerce/
-    'mc_': [
-        'cid',
-        'eid'
-    ],
-
-    // comScore Digital Analytix?
-    // http://www.about-digitalanalytics.com/comscore-digital-analytix-url-campaign-generator
-    'ns_': [
-        'source',
-        'mchannel',
-        'campaign',
-        'linkname',
-        'fee'
-    ],
-
-    // Simple Reach
-    'sr_': [
-        'share'
-    ],
-
-    // Vero
-    'vero_': [
-        'conv',
-        'id'
-    ],
-
-    // Non-prefixy and 1-offs
-    '': [
-        // Facebook Click Identifier
-        // http://thisinterestsme.com/facebook-fbclid-parameter/
-        'fbclid',
-        // Google Click Identifier
-        'gclid',
-        // Some other Google Click thing
-        'ocid',
-        // Unknown
-        'ncid',
-        // Unknown
-        'nr_email_referer',
-        // Generic-ish. Facebook, Product Hunt and others
-        'ref',
-        // Alibaba-family 'super position model' tracker:
-        // https://github.com/newhouse/url-tracking-stripper/issues/38
-        'spm'
-    ]
-};
 
 // Go through all the trackers by their root and turn them into a big regex...
 const TRACKER_REGEXES_BY_ROOT = {};
@@ -401,7 +413,7 @@ for (let root in TRACKERS_BY_ROOT) {
 
 // Generate the URL patterns used for webRequest filtering
 // https://developer.chrome.com/extensions/match_patterns
-function generateTrackerPatternsArray() {
+function generateTrackerPatternsArray(TRACKERS_BY_ROOT) {
     const array = [];
     for (let root in TRACKERS_BY_ROOT) {
         for (let i=0; i < TRACKERS_BY_ROOT[root].length; i++) {
