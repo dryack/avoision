@@ -185,6 +185,7 @@ chrome.webRequest.onBeforeRequest.addListener(
     ['blocking']
 );
 
+// Commented out until needed
 // archive via unv.is
 /*chrome.webRequest.onBeforeRequest.addListener(
     function(details) {

@@ -27,3 +27,8 @@ function toggleFilterlist() {
     }
 }
 chrome.browserAction.onClicked.addListener(toggleFilterlist);
+
+const {
+    removeTrackersFromUrl,
+    generateTrackerPatternsArray,
+}                                               = require('./trackers');
