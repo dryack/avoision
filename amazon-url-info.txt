@@ -1,0 +1,87 @@
+From stacktrace:
+
+https://www.amazon.com/s?rh=
+k:-assdhjkadhjkhscue,
+n:3375251,
+p_n_condition-type:6503254011,
+p_72:2661618011,
+p_85:2470955011
+&page=6
+&bbn=2619526011
+&ie=UTF8
+&qid=1387193124
+&rnid=2619526011
+
+rh denotes the factors of query.
+k = keyword,
+n = category (Sports & Outdoors in this case)
+p_n_condition-type = new/used
+p_72 = 4 or more stars
+p_85 = prime eligible
+page = pagination offset(page nos).
+qid = the timestamp when the query result was generated.
+bbn = browse node numbers.Amazon uses a hierarchy of nodes with a number to the hierarchy to represent collections of items. Each number given is a browse node number.
+rnid = random id  for browsing the node.
+ie=utf8 = UTF-8 page encoding format.
+
+
+URLs we've seen that required handling:
+
+https://smile.amazon.com/s/ref=as_li_ss_tl?
+fst=as:off
+&rh=n:283155,n:!1000,n:9,p_n_feature_four_browse-bin:9336647011
+&bbn=9
+&ie=UTF8
+&qid=1505924851
+&rnid=9336644011
+&linkCode=sl2
+&tag=insta0c-20
+&linkId=dd429c5e6d60a474f921289dd1c94340
+
+---
+
+https://www.amazon.com/Social-Justice-Warrior-Handbook/dp/1682614794?&_encoding=UTF8&tag=drhelenblog-20&linkCode=ur2&linkId=4e47f4a0dda35da042a8a009a844c95e&camp=1789&creative=9325
+https://www.amazon.com/Social-Justice-Warrior-Handbook/dp/1682614794?&_encoding=UTF8&linkCode=ur2&linkId=4e47f4a0dda35da042a8a009a844c95e&camp=1789&creative=9325&tag=drhelenblog-20
+
+https://smile.amazon.com/Social-Justice-Warrior-Handbook/dp/1682614794?&_encoding=UTF8&linkCode=ur2&linkId=4e47f4a0dda35da042a8a009a844c95e&camp=1789&creative=9325 [[ after stripping ]]
+https://smile.amazon.com/Social-Justice-Warrior-Handbook/dp/1682614794?&_encoding=UTF8&linkId=4e47f4a0dda35da042a8a009a844c95e&camp=1789&creative=9325 [[ re ]]
+https://smile.amazon.com/Social-Justice-Warrior-Handbook/dp/1682614794?&_encoding=UTF8&linkId=4e47f4a0dda35da042a8a009a844c95e&camp=1789 [[ re ]] (linkId is 32 alphanum?)
+https://smile.amazon.com/Social-Justice-Warrior-Handbook/dp/1682614794?&_encoding=UTF8&camp=1789 [[ no linkId ]]
+
+
+https://smile.amazon.com/dp/B01N9P2QQF?ref_=imdbref_tt_wbr_aiv&tag=imdbtag_tt_wbr_aiv-20
+https://www.amazon.com/gp/product/1607747308/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1607747308&linkCode=as2&tag=drhelenblog-20&linkId=b8ef1420e5fb3d29a12eee2a2bcff7da
+http://amzn.to/2xRt9XG
+
+----
+
+--
+version from instapundit link:
+https://www.amazon.com/Cyber-Monday/b/ref=nav_swm_CMDW17_GW_SWM_EN?ie=UTF8&node=5550342011&pf_rd_p=bca09db1-0d4d-45ce-8499-c161fcb82cf3&pf_rd_s=nav-sitewide-msg&pf_rd_t=4201&pf_rd_i=navbar-4201&pf_rd_m=ATVPDKIKX0DER&pf_rd_r=DK3Q6F8XK8M95VA820SC&pf_rd_r=DK3Q6F8XK8M95VA820SC&pf_rd_p=bca09db1-0d4d-45ce-8499-c161fcb82cf3&_encoding=UTF8&tag=violentkids1-20&linkCode=ur2&linkId=368efed047ff78d47129e41cc78b4a84&camp=1789&creative=9325
+
+using avoision today (version 0.2.0)
+https://www.amazon.com/Cyber-Monday/b/ref=nav_swm_CMDW17_GW_SWM_EN?ie=UTF8&node=5550342011&pf_rd_p=bca09db1-0d4d-45ce-8499-c161fcb82cf3&pf_rd_s=nav-sitewide-msg&pf_rd_t=4201&pf_rd_i=navbar-4201&pf_rd_m=ATVPDKIKX0DER&pf_rd_r=DK3Q6F8XK8M95VA820SC&pf_rd_r=DK3Q6F8XK8M95VA820SC&pf_rd_p=bca09db1-0d4d-45ce-8499-c161fcb82cf3&
+
+works:
+https://www.amazon.com/Cyber-Monday/b/?node=5550342011
+
+---
+
+https://www.amazon.com/exec/obidos/ASIN/%201614755213/wwwviolentkicom
+
+https://www.amazon.com/exec/obidos/ASIN/B0747RTP2W/reasonmagazineA/
+
+---
+
+https://www.amazon.com/Stanley-FatMax-Xtreme-55-120-FuBar/dp/B000VSSG3O/ref=as_li_ss_tl?ie=UTF8&qid=1513704519&sr=8-1&keywords=Stanley+FatMax+FuBar+Utility+Bar&
+
+from http://amzn.to/2BZcEHm
+----
+
+
+helpful URLs for research:
+
+https://forums.aws.amazon.com/thread.jspa?threadID=35728
+http://etutorials.org/Misc/amazon+tips+tools/Chapter+5.+Associates+Program/Hack+72+Deep+Linking+to+Amazon+s+Mobile+Device+Pages/
+https://www.reddit.com/r/amazon/comments/qim88/referral_codes_how_can_you_identify_them/
+https://www.reddit.com/r/modtools/comments/qpdpo/a_user_style_to_highlight_amazon_affiliate_links/
