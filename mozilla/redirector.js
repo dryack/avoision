@@ -260,9 +260,9 @@ const ArchiveURLS =  [
 ];
 
 function cleaning(details){
+    // if we're in a mode without cleaning - gtfo
+    if(filter_list_state === 1 || filter_list_state === 3) { return }
     var url = details.url;
-    // not sure I care to shut this off, but the option exists
-    //if(filter_list_state === 1) { return }
     console.debug("Details: " + details.requestId);
     console.debug("\tDetails: " + details.url);
 
@@ -283,8 +283,8 @@ chrome.webRequest.onBeforeRequest.addListener(
 // send directly to archive.is
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
+        if(filter_list_state === 2 || filter_list_state === 3) { return }
         var url = details.url;
-        if(filter_list_state === 1) { return }
 
         return archiveUrlConstructor(url);
     },
@@ -298,8 +298,8 @@ chrome.webRequest.onBeforeRequest.addListener(
 // archive via via.hypothes.is
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
+        if(filter_list_state === 2 || filter_list_state === 3) { return }
         var url = details.url;
-        if(filter_list_state === 1) {return}
 
         return archiveViaConstructor(url);
     },
@@ -313,8 +313,8 @@ chrome.webRequest.onBeforeRequest.addListener(
 // archive via unv.is
 /*chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
+        if(filter_list_state === 2 || filter_list_state === 3) { return }
         var url = details.url;
-        if(filter_list_state === 1) {return}
 
         return archiveUnvConstructor(url);
     },
@@ -327,8 +327,8 @@ chrome.webRequest.onBeforeRequest.addListener(
 // archive via outline.com
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
+        if(filter_list_state === 2 || filter_list_state === 3) { return }
         var url = details.url;
-        if (filter_list_state === 1) {return}
 
         return archiveOutlineConstructor(url);
     },
