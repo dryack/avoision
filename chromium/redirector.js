@@ -78,7 +78,6 @@ const TRACKERS_BY_ROOT = {
         'conv',
         'id'
     ],
-
     // Non-prefixy and 1-offs
     '': [
         // Facebook Click Identifier
@@ -96,7 +95,13 @@ const TRACKERS_BY_ROOT = {
         'ref',
         // Alibaba-family 'super position model' tracker:
         // https://github.com/newhouse/url-tracking-stripper/issues/38
-        'spm'
+        'spm',
+        // amazon garbage
+        'camp',
+        'linkId',
+        'creative',
+        'linkCode',
+        'tag'
     ]
 };
 
@@ -254,22 +259,18 @@ const ArchiveURLS =  [
     "*://*.clickhole.com/*",
 ];
 
-// so try to build a blocking onBeforeRequest that builds the filters list for the next onBeforeRequest in line
-//var filters = {
-//    urls: ducky(),
-//    types: ["main_frame"]
-//};
 function cleaning(details){
     var url = details.url;
     // not sure I care to shut this off, but the option exists
     //if(filter_list_state === 1) { return }
     console.debug("Details: " + details.requestId);
     console.debug("\tDetails: " + details.url);
-    if(url.endsWith("?singlepage=true")) { return }
+
+    if(url.endsWith("?singlepage=true")) { return } //do i want this here?
 
     return cleanUrl(url);
 }
-// Catch everything for cleaning urls, etc
+// Catch whatever has been produced from TRACKERS_BY_ROOT for cleaning
 chrome.webRequest.onBeforeRequest.addListener(
     cleaning,
     {
@@ -385,17 +386,8 @@ function archiveUrlConstructor(url){
     return { redirectUrl: archiver + url };
 }
 
-// shamelessly stolen from the excellent https://github.com/newhouse/url-tracking-stripper whose code I've really come
-// to admire
-
-// Go through all the trackers by their root and turn them into a big regex...
-const TRACKER_REGEXES_BY_ROOT = {};
-for (let root in TRACKERS_BY_ROOT) {
-    // Old way, matching at the end 1 or unlimited times.
-    // TRACKER_REGEXES_BY_ROOT[root] = new RegExp("((^|&)" + root + "(" + TRACKERS_BY_ROOT[root].join('|') + ")=[^&#]+)", "ig");
-    // New way, matching at the end 0 or unlimited times. Hope this doesn't come back to be a problem.
-    TRACKER_REGEXES_BY_ROOT[root] = new RegExp("((^|&)" + root + "(" + TRACKERS_BY_ROOT[root].join('|') + ")=[^&#]*)", "ig");
-}
+// shamelessly stolen from the excellent https://github.com/newhouse/url-tracking-stripper whose code I've really
+// enjoyed
 
 // Generate the URL patterns used for webRequest filtering
 // https://developer.chrome.com/extensions/match_patterns
@@ -406,8 +398,6 @@ function generateTrackerPatternsArray(TRACKERS_BY_ROOT) {
             array.push( "*://*/*?*" + root + TRACKERS_BY_ROOT[root][i] + "=*" );
         }
     }
-    //add amazon stuff
-    array.push("*://*.amazon.com/*tag=*");
     console.debug(array);
     return array;
 }
@@ -439,11 +429,3 @@ function removeTrackersFromUrl(url) {
 
     return urlPieces[1] ? urlPieces.join('?') : urlPieces[0];
 }
-///////////////////////
-// FEATURE Flag(?) to avoid amazon referrers
-
-// FEATURE allow whitelisting amazon referrers
-// assume referrers should be stopped
-
-// FEATURE (doubtful) look for alternate links for youtube vids
-// even if possible without more pain than i'm willing to accept, starting to go outside the original scope i'd intended
