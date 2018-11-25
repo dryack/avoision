@@ -100,7 +100,6 @@ const TRACKERS_BY_ROOT = {
     ]
 };
 
-
 const ViaURLS = [
     "*://*.vice.com/*",
     "*://*.nationalreview/*"
@@ -253,7 +252,6 @@ const ArchiveURLS =  [
     "*://*.thesaurus.com/*",
     "*://*.xkcd.com/*",
     "*://*.clickhole.com/*",
-    "*://*.amazon.com/*tag=*"
 ];
 
 // so try to build a blocking onBeforeRequest that builds the filters list for the next onBeforeRequest in line
@@ -263,19 +261,19 @@ const ArchiveURLS =  [
 //};
 function cleaning(details){
     var url = details.url;
+    // not sure I care to shut this off, but the option exists
+    //if(filter_list_state === 1) { return }
     console.debug("Details: " + details.requestId);
     console.debug("\tDetails: " + details.url);
     if(url.endsWith("?singlepage=true")) { return }
 
     return cleanUrl(url);
-    // not sure I care to shut this off, but the option exists
-    //if(filter_list_state === 1) { return }
 }
 // Catch everything for cleaning urls, etc
 chrome.webRequest.onBeforeRequest.addListener(
     cleaning,
     {
-        urls: generateTrackerPatternsArray(),
+        urls: generateTrackerPatternsArray(TRACKERS_BY_ROOT),
         types: ["main_frame"]
     },
     ['blocking']
@@ -342,7 +340,6 @@ function cleanUrl(url) {
     var strippedUrl = removeTrackersFromUrl(url);
 
     return { redirectUrl: strippedUrl}
-
 }
 
 // build the archive.is request url using via.hypothes.is
@@ -387,20 +384,9 @@ function archiveUrlConstructor(url){
      // fallthrough option so to speak - our basic use
     return { redirectUrl: archiver + url };
 }
-// FEATURE Flag(?) to avoid amazon referrers
-
-// FEATURE allow whitelisting amazon referrers
-// assume referrers should be stopped
-
-// FEATURE (doubtful) look for alternate links for youtube vids
-// even if possible without more pain than i'm willing to accept, starting to go outside the original scope i'd intended
-
-// FEATURE support http://unvis.it/
-
 
 // shamelessly stolen from the excellent https://github.com/newhouse/url-tracking-stripper whose code I've really come
 // to admire
-
 
 // Go through all the trackers by their root and turn them into a big regex...
 const TRACKER_REGEXES_BY_ROOT = {};
@@ -420,7 +406,9 @@ function generateTrackerPatternsArray(TRACKERS_BY_ROOT) {
             array.push( "*://*/*?*" + root + TRACKERS_BY_ROOT[root][i] + "=*" );
         }
     }
-
+    //add amazon stuff
+    array.push("*://*.amazon.com/*tag=*");
+    console.debug(array);
     return array;
 }
 
@@ -451,3 +439,11 @@ function removeTrackersFromUrl(url) {
 
     return urlPieces[1] ? urlPieces.join('?') : urlPieces[0];
 }
+///////////////////////
+// FEATURE Flag(?) to avoid amazon referrers
+
+// FEATURE allow whitelisting amazon referrers
+// assume referrers should be stopped
+
+// FEATURE (doubtful) look for alternate links for youtube vids
+// even if possible without more pain than i'm willing to accept, starting to go outside the original scope i'd intended
