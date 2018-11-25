@@ -280,6 +280,7 @@ chrome.webRequest.onBeforeRequest.addListener(
     ['blocking']
 );
 
+// send directly to archive.is
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         var url = details.url;
@@ -388,6 +389,15 @@ function archiveUrlConstructor(url){
 
 // shamelessly stolen from the excellent https://github.com/newhouse/url-tracking-stripper whose code I've really
 // enjoyed
+
+// Go through all the trackers by their root and turn them into a big regex...
+const TRACKER_REGEXES_BY_ROOT = {};
+for (let root in TRACKERS_BY_ROOT) {
+    // Old way, matching at the end 1 or unlimited times.
+    // TRACKER_REGEXES_BY_ROOT[root] = new RegExp("((^|&)" + root + "(" + TRACKERS_BY_ROOT[root].join('|') + ")=[^&#]+)", "ig");
+    // New way, matching at the end 0 or unlimited times. Hope this doesn't come back to be a problem.
+    TRACKER_REGEXES_BY_ROOT[root] = new RegExp("((^|&)" + root + "(" + TRACKERS_BY_ROOT[root].join('|') + ")=[^&#]*)", "ig");
+}
 
 // Generate the URL patterns used for webRequest filtering
 // https://developer.chrome.com/extensions/match_patterns
