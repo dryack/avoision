@@ -234,7 +234,6 @@ const ArchiveURLS =  [
     "*://*.cassiuslife.com/*",
     "*://*.yournewswire.com/*",
     "*://*.balkin.blogspot.com/*",
-    "*://*.newsbusters.org/*",
     "*://*.therpgpundit.blogspot.com/*",
     "*://*.townhall.com/*",
     "*://*.spiked-online.com/*",
