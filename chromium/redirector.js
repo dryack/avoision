@@ -107,12 +107,14 @@ const TRACKERS_BY_ROOT = {
 
 const ViaURLS = [
     "*://*.vice.com/*",
-    "*://*.nationalreview/*"
+    "*://*.nationalreview.com/*",
+    "*://*.newsbusters.org/*",
 ];
 const UnvisURLS = [];
 const OutlineURLS = [
     "*://*.nytimes.com/*",
     "*://*.slate.com/*",
+    "*://*.massivelyop.com/*",
     "*://*.wired.com/*"
 ];
 const ArchiveURLS =  [
@@ -237,7 +239,6 @@ const ArchiveURLS =  [
     "*://*.townhall.com/*",
     "*://*.spiked-online.com/*",
     "*://*.cnbc.com/*",
-    "*://*.nationalreview.com/*",
     "*://*.theamericanconservative.com/*",
     "*://*.thefederalist.com/*",
     "*://*.hoodline.com/*",
@@ -249,7 +250,6 @@ const ArchiveURLS =  [
     "*://*.politico.com/*",
     "*://*.americanthinker.com/*",
     "*://*.metalsucks.net/*",
-    "*://*.massivelyop.com/*",
     "*://*.gamerevolution.com/*",
     "*://*.theoutline.com/*",
     "*://*.aclu.org/*",
@@ -257,6 +257,7 @@ const ArchiveURLS =  [
     "*://*.thesaurus.com/*",
     "*://*.xkcd.com/*",
     "*://*.clickhole.com/*",
+    "*://*.almatcboykin.wordpress.com/*"
 ];
 
 function cleaning(details){
