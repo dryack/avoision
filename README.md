@@ -12,16 +12,23 @@ control... or whatever... be a minor irritation while *feeling* like you have so
 ## features
 
 * intercepts requests to sites that you don't want to support and redirects to a MementoWeb API supporting web archiver (defaulting to archive.is, which you should totally [donate](https://liberapay.com/archiveis) to if you find this project useful)
-* with the anti-web-archiver arms race ongoing, we now support multiple methods (currently via.hypothesis and unv.is) to obtain a good page to send over to archive.is
-* right-click context menu to send current page to archive.is (including using via.hypothes.is or unv.is as pre-processors)
+* with the anti-web-archiver arms race ongoing, we now support multiple methods
+  * via.hypothesis
+  * unv.is
+  * outline.com
+* right-click context menu to send current page to archive.is or to archive.is via any of the above listed methods
 * cleans amazon referral links
+* strips most URL tracking parameters
+* click the extension icon to change it's current mode of operation
+  * blank: standard operation
+  * ARC: archiving only - no URL stripping
+  * STRP: URL stripping only - no archiving
+  * OFF: yeah... off
 
 ## planned
 
-* clean up tracking urls
 * configurability via text file
 * detect and remove non-amazon affiliate links as I find them
-* ability to whitelist amazon referral links
 
 ## installation
 
