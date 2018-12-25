@@ -109,16 +109,26 @@ const ViaURLS = [
     "*://*.vice.com/*",
     "*://*.nationalreview.com/*",
     "*://*.newsbusters.org/*",
+    "*://*.huffingtonpost.com/*"
 ];
 const UnvisURLS = [];
 const OutlineURLS = [
     "*://*.nytimes.com/*",
     "*://*.slate.com/*",
     "*://*.massivelyop.com/*",
+    "*://*.aclu.org/*",
+    "*://*.washingtonexaminer.com/*",
+    "*://*.fortune.com/*",
+    "*://*.bloomberg.com/*",
+    "*://*.thecollegefix.com/*",
     "*://*.wired.com/*"
 ];
 const ArchiveURLS =  [
     "*://*.washingtonpost.com/*",
+    "*://*.eurogamer.net/*",
+    "*://*.gunsinthenews.com/*",
+    "*://*.usatoday.com/*",
+    "*://*.flagandcross.com/*",
     "*://*.wapo.com/*",
     "*://*.arstechnica.com/*",
     "*://*.buzzfeed.com/*",
@@ -161,7 +171,6 @@ const ArchiveURLS =  [
     "*://*.gamesindustry.biz/*",
     "*://*.gawker.com/*",
     "*://*.gizmodo.com/*",
-    "*://*.huffingtonpost.com/*",
     "*://*.io9.com/*",
     "*://*.infowars.com/*",
     "*://*.jalopnik.com/*",
@@ -209,14 +218,11 @@ const ArchiveURLS =  [
     "*://*.cnn.com/*",
     "*://*.powerlineblog.com/*",
     "*://*.mu.nu/*",
-    "*://*.bloomberg.com/*",
-    "*://*.washingtonexaminer.com/*",
     "*://*.reallifemag.com/*",
     "*://*.jeffro.wordpress.com/*",
     "*://*.avoiceformen.com/*",
     "*://*.hoover.org/*",
     "*://*.sfexaminer.com/*",
-    "*://*.thecollegefix.com/*",
     "*://*.campusreform.org/*",
     "*://*.yiannopoulos.net/*",
     "*://*.48hills.org/*",
@@ -251,7 +257,6 @@ const ArchiveURLS =  [
     "*://*.metalsucks.net/*",
     "*://*.gamerevolution.com/*",
     "*://*.theoutline.com/*",
-    "*://*.aclu.org/*",
     "*://*.dictionary.com/*",
     "*://*.thesaurus.com/*",
     "*://*.xkcd.com/*",
