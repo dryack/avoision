@@ -5,7 +5,7 @@ labels:
 
 ---
 
-## Base URL
+### Base URL
 *(examples: "nbcnews.com", "yahoo.com/news/")*
 
 ### Rationale
