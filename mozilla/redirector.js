@@ -263,13 +263,19 @@ const ArchiveURLS =  [
     "*://*.clickhole.com/*",
     "*://*.almatcboykin.wordpress.com/*"
 ];
+const archiverDomains = [
+    "archive.today",
+    "archive.fo",
+    "archive.li",
+    "archive.vn",
+    "archive.md",
+    "archive.ph"
+];
 
 function cleaning(details){
     // if we're in a mode without cleaning - gtfo
     if(filter_list_state === 1 || filter_list_state === 3) { return }
     var url = details.url;
-    console.debug("Details: " + details.requestId);
-    console.debug("\tDetails: " + details.url);
 
     if(url.endsWith("?singlepage=true")) { return } //do i want this here?
 
@@ -349,9 +355,13 @@ function cleanUrl(url) {
     return { redirectUrl: strippedUrl}
 }
 
+function pickArchiver(domains) {
+    return domains[Math.floor(Math.random() * domains.length)];
+}
+
 // build the archive.is request url using via.hypothes.is
 function archiveViaConstructor(url) {
-    var archiver = 'https://archive.is/?run=1&url=https://via.hypothes.is/';
+    const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=https://via.hypothes.is/';
     var finalUrl = archiver + url;
 
     return { redirectUrl: finalUrl };
@@ -359,7 +369,7 @@ function archiveViaConstructor(url) {
 
 // build the archive.is request url using unv.is
 function archiveUnvConstructor(url) {
-    var archiver = 'https://archive.is/?run=1&url=https://unv.is/';
+    const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=https://unv.is/';
     var finalUrl = archiver + url.replace(/(http|https):\/\//, '');
 
     return { redirectUrl: finalUrl };
@@ -367,7 +377,7 @@ function archiveUnvConstructor(url) {
 
 // build the archive.is request url using outline.com
 function archiveOutlineConstructor(url) {
-    var archiver = 'https://archive.is/?run=1&url=https://outline.com/';
+    const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=https://outline.com/';
     var finalUrl = archiver + url;
 
     return { redirectUrl: finalUrl };
@@ -375,7 +385,7 @@ function archiveOutlineConstructor(url) {
 
 // Build the archive.is request url
 function archiveUrlConstructor(url){
-    var archiver = 'https://archive.is/?run=1&url=';
+    const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=';
 
     // pjmedia crap
     var pjmedia_singlepage = '?singlepage=true'; // avoid the irritating More button
