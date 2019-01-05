@@ -13,9 +13,10 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>
 
+
 function sendToArchiver(info) {
-    var archiver = 'https://archive.is/?run=1&url=';
-    var url = archiver + info.pageUrl;
+    const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=';
+    const url = archiver + info.pageUrl;
     chrome.tabs.create({
         url: url,
         active: true
@@ -23,8 +24,8 @@ function sendToArchiver(info) {
 }
 
 function sendViaVia(info) {
-    var archiver = 'https://archive.is/?run=1&url=https://via.hypothes.is/';
-    var url = archiver + info.pageUrl;
+    const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=https://via.hypothes.is/';
+    const url = archiver + info.pageUrl;
 
     chrome.tabs.create({
         url: url,
@@ -33,8 +34,8 @@ function sendViaVia(info) {
 }
 
 function sendViaUnvis(info) {
-    var archiver = 'https://archive.is/?run=1&url=https://unv.is/';
-    var url = archiver + info.pageUrl.replace(/(http|https):\/\//, '');
+    const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=https://unv.is/';
+    const url = archiver + info.pageUrl.replace(/(http|https):\/\//, '');
 
     chrome.tabs.create({
         url: url,
@@ -43,8 +44,8 @@ function sendViaUnvis(info) {
 }
 
 function sendViaOutline(info) {
-    var archiver = 'https://archive.is/?run=1&url=https://outline.com/';
-    var url = archiver + info.pageUrl;
+    const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=https://outline.com/';
+    const url = archiver + info.pageUrl;
 
     chrome.tabs.create({
         url: url,
