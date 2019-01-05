@@ -109,6 +109,8 @@ const ViaURLS = [
     "*://*.vice.com/*",
     "*://*.nationalreview.com/*",
     "*://*.newsbusters.org/*",
+    "*://*.sfgate.com/*",
+    "*://*.sfchronicle.com/*",
     "*://*.huffingtonpost.com/*"
 ];
 const UnvisURLS = [];
@@ -121,13 +123,13 @@ const OutlineURLS = [
     "*://*.fortune.com/*",
     "*://*.bloomberg.com/*",
     "*://*.thecollegefix.com/*",
+    "*://*.usatoday.com/*",
     "*://*.wired.com/*"
 ];
 const ArchiveURLS =  [
     "*://*.washingtonpost.com/*",
     "*://*.eurogamer.net/*",
     "*://*.gunsinthenews.com/*",
-    "*://*.usatoday.com/*",
     "*://*.flagandcross.com/*",
     "*://*.wapo.com/*",
     "*://*.arstechnica.com/*",
@@ -261,6 +263,8 @@ const ArchiveURLS =  [
     "*://*.thesaurus.com/*",
     "*://*.xkcd.com/*",
     "*://*.clickhole.com/*",
+    "*://*.sputniknews.com/*",
+    "*://*.mercurynews.com/*",
     "*://*.almatcboykin.wordpress.com/*"
 ];
 const archiverDomains = [

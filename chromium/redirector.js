@@ -30,6 +30,12 @@ const TRACKERS_BY_ROOT = {
         'swu'
     ],
 
+    //no clue - don't care - don't trust 'em
+    'rc_': [
+        'fifo',
+        'col'
+    ],
+
     // Adobe Omniture SiteCatalyst
     'IC': [
         'ID'
@@ -101,7 +107,12 @@ const TRACKERS_BY_ROOT = {
         'linkId',
         'creative',
         'linkCode',
-        'tag'
+        'tag',
+        // random stuff - appears not to break when cleaned during tests
+        'sl',
+        'tpl',
+        'mp',
+        'trkid'
     ]
 };
 
@@ -109,6 +120,8 @@ const ViaURLS = [
     "*://*.vice.com/*",
     "*://*.nationalreview.com/*",
     "*://*.newsbusters.org/*",
+    "*://*.sfgate.com/*",
+    "*://*.sfchronicle.com/*",
     "*://*.huffingtonpost.com/*"
 ];
 const UnvisURLS = [];
@@ -121,13 +134,13 @@ const OutlineURLS = [
     "*://*.fortune.com/*",
     "*://*.bloomberg.com/*",
     "*://*.thecollegefix.com/*",
+    "*://*.usatoday.com/*",
     "*://*.wired.com/*"
 ];
 const ArchiveURLS =  [
     "*://*.washingtonpost.com/*",
     "*://*.eurogamer.net/*",
     "*://*.gunsinthenews.com/*",
-    "*://*.usatoday.com/*",
     "*://*.flagandcross.com/*",
     "*://*.wapo.com/*",
     "*://*.arstechnica.com/*",
@@ -211,8 +224,6 @@ const ArchiveURLS =  [
     "*://*.gothamist.com/*",
     "*://*.worldstarhiphop.com/*",
     "*://*.latimes.com/*",
-    "*://*.sfgate.com/*",
-    "*://*.sfchronicle.com/*",
     "*://*.seattlepi.com/*",
     "*://*.nypost.com/*",
     "*://*.cnn.com/*",
@@ -261,6 +272,8 @@ const ArchiveURLS =  [
     "*://*.thesaurus.com/*",
     "*://*.xkcd.com/*",
     "*://*.clickhole.com/*",
+    "*://*.sputniknews.com/*",
+    "*://*.mercurynews.com/*",
     "*://*.almatcboykin.wordpress.com/*"
 ];
 const archiverDomains = [
