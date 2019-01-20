@@ -274,6 +274,7 @@ const archiverDomains = [
     "archive.li",
     "archive.vn",
     "archive.md",
+    "archive.is",
     "archive.ph"
 ];
 
