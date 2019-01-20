@@ -310,11 +310,10 @@ chrome.webRequest.onBeforeRequest.addListener(
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         if(filter_list_state === 2 || filter_list_state === 3) { return }
-        var url = details.url;
+        const url = details.url;
 
         return archiveUrlConstructor(url);
     },
-    // TODO load from a simple config file - hardcoding is terrible
     {
         urls: ArchiveURLS
     },
@@ -325,7 +324,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         if(filter_list_state === 2 || filter_list_state === 3) { return }
-        var url = details.url;
+        const url = details.url;
 
         return archiveViaConstructor(url);
     },
@@ -354,7 +353,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         if(filter_list_state === 2 || filter_list_state === 3) { return }
-        var url = details.url;
+        const url = details.url;
 
         return archiveOutlineConstructor(url);
     },
@@ -365,7 +364,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 
 function cleanUrl(url) {
-    var strippedUrl = removeTrackersFromUrl(url);
+    const strippedUrl = removeTrackersFromUrl(url);
 
     return { redirectUrl: strippedUrl}
 }
@@ -377,7 +376,7 @@ function pickArchiver(domains) {
 // build the archive.is request url using via.hypothes.is
 function archiveViaConstructor(url) {
     const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=https://via.hypothes.is/';
-    var finalUrl = archiver + url;
+    const finalUrl = archiver + url;
 
     return { redirectUrl: finalUrl };
 }
@@ -385,7 +384,7 @@ function archiveViaConstructor(url) {
 // build the archive.is request url using unv.is
 function archiveUnvConstructor(url) {
     const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=https://unv.is/';
-    var finalUrl = archiver + url.replace(/(http|https):\/\//, '');
+    const finalUrl = archiver + url.replace(/(http|https):\/\//, '');
 
     return { redirectUrl: finalUrl };
 }
@@ -393,7 +392,7 @@ function archiveUnvConstructor(url) {
 // build the archive.is request url using outline.com
 function archiveOutlineConstructor(url) {
     const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=https://outline.com/';
-    var finalUrl = archiver + url;
+    const finalUrl = archiver + url;
 
     return { redirectUrl: finalUrl };
 }
@@ -403,8 +402,8 @@ function archiveUrlConstructor(url){
     const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=';
 
     // pjmedia crap
-    var pjmedia_singlepage = '?singlepage=true'; // avoid the irritating More button
-    var pjmediaRegex = new RegExp(/(pjmedia\.com)/); // detect we're on pjmedia site
+    const pjmedia_singlepage = '?singlepage=true'; // avoid the irritating More button
+    const pjmediaRegex = new RegExp(/(pjmedia\.com)/); // detect we're on pjmedia site
     if(url.endsWith(pjmedia_singlepage)) {
         return { redirectUrl: archiver + url}
     }
