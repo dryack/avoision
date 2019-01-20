@@ -128,6 +128,7 @@ const OutlineURLS = [
 ];
 const ArchiveURLS =  [
     "*://*.washingtonpost.com/*",
+    "*://*.theatlantic.com/*",
     "*://*.eurogamer.net/*",
     "*://*.gunsinthenews.com/*",
     "*://*.flagandcross.com/*",
