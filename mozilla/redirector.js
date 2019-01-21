@@ -104,6 +104,9 @@ const TRACKERS_BY_ROOT = {
         'tag'
     ]
 };
+const MISC_FOR_CLEANING = [
+    "*://*.reddit.com/*"
+]; // items we want to handle within the cleaning function
 
 const ViaURLS = [
     "*://*.vice.com/*",
@@ -128,6 +131,7 @@ const OutlineURLS = [
 ];
 const ArchiveURLS =  [
     "*://*.washingtonpost.com/*",
+    "*://*.theatlantic.com/*",
     "*://*.eurogamer.net/*",
     "*://*.gunsinthenews.com/*",
     "*://*.flagandcross.com/*",
@@ -273,24 +277,35 @@ const archiverDomains = [
     "archive.li",
     "archive.vn",
     "archive.md",
+    "archive.is",
     "archive.ph"
 ];
 
 function cleaning(details){
+    let url = details.url;
+
+    // deal with reddit
+    const redditRegex = new RegExp(/(reddit\.com)/);
+    const oldRedditRegex = new RegExp(/(old\.reddit\.com)/);
+    if (!url.match(oldRedditRegex)) if (url.match(redditRegex)) {
+        url = oldReddit(url);
+    }
+
     // if we're in a mode without cleaning - gtfo
     if(filter_list_state === 1 || filter_list_state === 3) { return }
-    var url = details.url;
 
     if(url.endsWith("?singlepage=true")) { return } //do i want this here?
 
     return cleanUrl(url);
 }
+
 // Catch whatever has been produced from TRACKERS_BY_ROOT for cleaning
 chrome.webRequest.onBeforeRequest.addListener(
     cleaning,
     {
-        urls: generateTrackerPatternsArray(TRACKERS_BY_ROOT),
-        types: ["main_frame"]
+        urls: generateTrackerPatternsArray(TRACKERS_BY_ROOT)//,
+        // not sure we want this
+        //types: ["main_frame"]
     },
     ['blocking']
 );
@@ -299,13 +314,13 @@ chrome.webRequest.onBeforeRequest.addListener(
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         if(filter_list_state === 2 || filter_list_state === 3) { return }
-        var url = details.url;
+        const url = details.url;
 
         return archiveUrlConstructor(url);
     },
-    // TODO load from a simple config file - hardcoding is terrible
     {
-        urls: ArchiveURLS
+        urls: ArchiveURLS,
+        types: ["main_frame"]
     },
     ['blocking'] // don't let the request go until we get back a redirectUrl (or other return in theory)
 );
@@ -314,12 +329,13 @@ chrome.webRequest.onBeforeRequest.addListener(
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         if(filter_list_state === 2 || filter_list_state === 3) { return }
-        var url = details.url;
+        const url = details.url;
 
         return archiveViaConstructor(url);
     },
     {
-        urls: ViaURLS
+        urls: ViaURLS,
+        types: ["main_frame"]
     },
     ['blocking']
 );
@@ -334,7 +350,8 @@ chrome.webRequest.onBeforeRequest.addListener(
         return archiveUnvConstructor(url);
     },
     {
-        urls: UnvisURLS
+        urls: UnvisURLS,
+        types: ["main_frame"]
     },
     ['blocking']
 );*/
@@ -343,18 +360,19 @@ chrome.webRequest.onBeforeRequest.addListener(
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         if(filter_list_state === 2 || filter_list_state === 3) { return }
-        var url = details.url;
+        const url = details.url;
 
         return archiveOutlineConstructor(url);
     },
     {
-        urls: OutlineURLS
+        urls: OutlineURLS,
+        types: ["main_frame"]
     },
     ['blocking']
 );
 
 function cleanUrl(url) {
-    var strippedUrl = removeTrackersFromUrl(url);
+    const strippedUrl = removeTrackersFromUrl(url);
 
     return { redirectUrl: strippedUrl}
 }
@@ -363,10 +381,15 @@ function pickArchiver(domains) {
     return domains[Math.floor(Math.random() * domains.length)];
 }
 
+function oldReddit(redditUrl) {
+    const REDDIT_URL = new RegExp(/(https?:\/\/)(www\.)?(reddit\.com)/);
+    return redditUrl.replace(REDDIT_URL, "$1old.$3");
+}
+
 // build the archive.is request url using via.hypothes.is
 function archiveViaConstructor(url) {
     const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=https://via.hypothes.is/';
-    var finalUrl = archiver + url;
+    const finalUrl = archiver + url;
 
     return { redirectUrl: finalUrl };
 }
@@ -374,7 +397,7 @@ function archiveViaConstructor(url) {
 // build the archive.is request url using unv.is
 function archiveUnvConstructor(url) {
     const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=https://unv.is/';
-    var finalUrl = archiver + url.replace(/(http|https):\/\//, '');
+    const finalUrl = archiver + url.replace(/(http|https):\/\//, '');
 
     return { redirectUrl: finalUrl };
 }
@@ -382,7 +405,7 @@ function archiveUnvConstructor(url) {
 // build the archive.is request url using outline.com
 function archiveOutlineConstructor(url) {
     const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=https://outline.com/';
-    var finalUrl = archiver + url;
+    const finalUrl = archiver + url;
 
     return { redirectUrl: finalUrl };
 }
@@ -392,8 +415,8 @@ function archiveUrlConstructor(url){
     const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=';
 
     // pjmedia crap
-    var pjmedia_singlepage = '?singlepage=true'; // avoid the irritating More button
-    var pjmediaRegex = new RegExp(/(pjmedia\.com)/); // detect we're on pjmedia site
+    const pjmedia_singlepage = '?singlepage=true'; // avoid the irritating More button
+    const pjmediaRegex = new RegExp(/(pjmedia\.com)/); // detect we're on pjmedia site
     if(url.endsWith(pjmedia_singlepage)) {
         return { redirectUrl: archiver + url}
     }
@@ -417,7 +440,6 @@ for (let root in TRACKERS_BY_ROOT) {
     // New way, matching at the end 0 or unlimited times. Hope this doesn't come back to be a problem.
     TRACKER_REGEXES_BY_ROOT[root] = new RegExp("((^|&)" + root + "(" + TRACKERS_BY_ROOT[root].join('|') + ")=[^&#]*)", "ig");
 }
-
 // Generate the URL patterns used for webRequest filtering
 // https://developer.chrome.com/extensions/match_patterns
 function generateTrackerPatternsArray(TRACKERS_BY_ROOT) {
@@ -427,7 +449,6 @@ function generateTrackerPatternsArray(TRACKERS_BY_ROOT) {
             array.push( "*://*/*?*" + root + TRACKERS_BY_ROOT[root][i] + "=*" );
         }
     }
-    console.debug(array);
     return array;
 }
 
