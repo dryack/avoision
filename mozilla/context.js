@@ -92,7 +92,6 @@ chrome.contextMenus.create({
     id: 'ContextMenuViaOutline',
     title: 'to archive.is using outline.com',
     parentId: 'ContextMenuAvoision',
-    visible: true,
     enabled: true,
     onclick: sendViaOutline
 });
