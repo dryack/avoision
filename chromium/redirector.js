@@ -118,6 +118,7 @@ const TRACKERS_BY_ROOT = {
 const MISC_FOR_CLEANING = [
     "*://*.reddit.com/*"
 ]; // items we want to handle within the cleaning function
+
 const ViaURLS = [
     "*://*.vice.com/*",
     "*://*.nationalreview.com/*",
@@ -326,7 +327,8 @@ chrome.webRequest.onBeforeRequest.addListener(
         return archiveUrlConstructor(url);
     },
     {
-        urls: ArchiveURLS
+        urls: ArchiveURLS,
+        types: ["main_frame"]
     },
     ['blocking'] // don't let the request go until we get back a redirectUrl (or other return in theory)
 );
@@ -340,7 +342,8 @@ chrome.webRequest.onBeforeRequest.addListener(
         return archiveViaConstructor(url);
     },
     {
-        urls: ViaURLS
+        urls: ViaURLS,
+        types: ["main_frame"]
     },
     ['blocking']
 );
@@ -355,7 +358,8 @@ chrome.webRequest.onBeforeRequest.addListener(
         return archiveUnvConstructor(url);
     },
     {
-        urls: UnvisURLS
+        urls: UnvisURLS,
+        types: ["main_frame"]
     },
     ['blocking']
 );*/
@@ -369,7 +373,8 @@ chrome.webRequest.onBeforeRequest.addListener(
         return archiveOutlineConstructor(url);
     },
     {
-        urls: OutlineURLS
+        urls: OutlineURLS,
+        types: ["main_frame"]
     },
     ['blocking']
 );
@@ -428,7 +433,7 @@ function archiveUrlConstructor(url){
         return { redirectUrl: archiver + url + pjmedia_singlepage };
     }
 
-     // fallthrough option so to speak - our basic use
+    // fallthrough option so to speak - our basic use
     return { redirectUrl: archiver + url };
 }
 

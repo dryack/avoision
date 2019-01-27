@@ -30,6 +30,12 @@ const TRACKERS_BY_ROOT = {
         'swu'
     ],
 
+    //no clue - don't care - don't trust 'em
+    'rc_': [
+        'fifo',
+        'col'
+    ],
+
     // Adobe Omniture SiteCatalyst
     'IC': [
         'ID'
@@ -101,7 +107,12 @@ const TRACKERS_BY_ROOT = {
         'linkId',
         'creative',
         'linkCode',
-        'tag'
+        'tag',
+        // random stuff - appears not to break when cleaned during tests
+        'sl',
+        'tpl',
+        'mp',
+        'trkid'
     ]
 };
 const MISC_FOR_CLEANING = [
@@ -217,8 +228,6 @@ const ArchiveURLS =  [
     "*://*.gothamist.com/*",
     "*://*.worldstarhiphop.com/*",
     "*://*.latimes.com/*",
-    "*://*.sfgate.com/*",
-    "*://*.sfchronicle.com/*",
     "*://*.seattlepi.com/*",
     "*://*.nypost.com/*",
     "*://*.cnn.com/*",
@@ -303,9 +312,8 @@ function cleaning(details){
 chrome.webRequest.onBeforeRequest.addListener(
     cleaning,
     {
-        urls: generateTrackerPatternsArray(TRACKERS_BY_ROOT)//,
-        // not sure we want this
-        //types: ["main_frame"]
+        urls: generateTrackerPatternsArray(TRACKERS_BY_ROOT),
+        types: ["main_frame"]
     },
     ['blocking']
 );
@@ -440,6 +448,7 @@ for (let root in TRACKERS_BY_ROOT) {
     // New way, matching at the end 0 or unlimited times. Hope this doesn't come back to be a problem.
     TRACKER_REGEXES_BY_ROOT[root] = new RegExp("((^|&)" + root + "(" + TRACKERS_BY_ROOT[root].join('|') + ")=[^&#]*)", "ig");
 }
+
 // Generate the URL patterns used for webRequest filtering
 // https://developer.chrome.com/extensions/match_patterns
 function generateTrackerPatternsArray(TRACKERS_BY_ROOT) {
@@ -448,6 +457,9 @@ function generateTrackerPatternsArray(TRACKERS_BY_ROOT) {
         for (let i=0; i < TRACKERS_BY_ROOT[root].length; i++) {
             array.push( "*://*/*?*" + root + TRACKERS_BY_ROOT[root][i] + "=*" );
         }
+    }
+    for (let i in MISC_FOR_CLEANING) {
+        array.push(MISC_FOR_CLEANING[i])
     }
     return array;
 }
