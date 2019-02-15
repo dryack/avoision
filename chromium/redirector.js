@@ -310,7 +310,9 @@ function cleaning(details){
 
 // Catch whatever has been produced from TRACKERS_BY_ROOT for cleaning
 chrome.webRequest.onBeforeRequest.addListener(
-    cleaning,
+    function(details) {
+        return cleaning(details)
+    },
     {
         urls: generateTrackerPatternsArray(TRACKERS_BY_ROOT),
         types: ["main_frame"]
