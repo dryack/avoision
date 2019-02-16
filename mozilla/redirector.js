@@ -298,12 +298,13 @@ function cleaning(details){
     // deal with reddit
     const redditRegex = new RegExp(/(reddit\.com)/);
     const oldRedditRegex = new RegExp(/(old\.reddit\.com)/);
+    if (url.match(oldRedditRegex)) if (url.endsWith('/')) {
+        return
+    }
+
     if (!url.match(oldRedditRegex)) if (url.match(redditRegex)) {
         url = oldReddit(url);
     }
-
-    // if we're in a mode without cleaning - gtfo
-    if(filter_list_state === 1 || filter_list_state === 3) { return }
 
     if(url.endsWith("?singlepage=true")) { return } //do i want this here?
 
@@ -313,6 +314,9 @@ function cleaning(details){
 // Catch whatever has been produced from TRACKERS_BY_ROOT for cleaning
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
+        // if we're in a mode without cleaning - gtfo
+        if(filter_list_state === 1 || filter_list_state === 3) { return }
+
         return cleaning(details)
     },
     {
