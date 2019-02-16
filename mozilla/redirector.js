@@ -132,6 +132,7 @@ const ViaURLS = [
     "*://*.fortune.com/*",
     "*://*.bloomberg.com/*",
     "*://*.usatoday.com/*",
+    "*://*.redstate.com/*",
     "*://*.wired.com/*"
 ];
 const UnvisURLS = [];
@@ -266,7 +267,6 @@ const ArchiveURLS =  [
     "*://*.theothermccain.com/*",
     "*://*.gamesradar.com/*",
     "*://*.newsweek.com/*",
-    "*://*.redstate.com/*",
     "*://*.politico.com/*",
     "*://*.americanthinker.com/*",
     "*://*.metalsucks.net/*",
@@ -278,6 +278,7 @@ const ArchiveURLS =  [
     "*://*.clickhole.com/*",
     "*://*.sputniknews.com/*",
     "*://*.mercurynews.com/*",
+    "*://*.bostonherald.com/*",
     "*://*.almatcboykin.wordpress.com/*"
 ];
 const archiverDomains = [
