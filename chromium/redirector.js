@@ -112,7 +112,8 @@ const TRACKERS_BY_ROOT = {
         'sl',
         'tpl',
         'mp',
-        'trkid'
+        'trkid',
+        'unlock'
     ]
 };
 const MISC_FOR_CLEANING = [
@@ -124,21 +125,22 @@ const ViaURLS = [
     "*://*.nationalreview.com/*",
     "*://*.newsbusters.org/*",
     "*://*.sfgate.com/*",
-    "*://*.sfchronicle.com/*",
-    "*://*.huffingtonpost.com/*"
-];
-const UnvisURLS = [];
-const OutlineURLS = [
+    "*://*.huffingtonpost.com/*",
     "*://*.nytimes.com/*",
     "*://*.slate.com/*",
     "*://*.massivelyop.com/*",
-    "*://*.aclu.org/*",
     "*://*.washingtonexaminer.com/*",
     "*://*.fortune.com/*",
     "*://*.bloomberg.com/*",
-    "*://*.thecollegefix.com/*",
     "*://*.usatoday.com/*",
+    "*://*.redstate.com/*",
     "*://*.wired.com/*"
+];
+const UnvisURLS = [];
+const OutlineURLS = [
+    "*://*.aclu.org/*",
+    "*://*.thecollegefix.com/*",
+    "*://*.sfchronicle.com/*"
 ];
 const ArchiveURLS =  [
     "*://*.washingtonpost.com/*",
@@ -266,7 +268,6 @@ const ArchiveURLS =  [
     "*://*.theothermccain.com/*",
     "*://*.gamesradar.com/*",
     "*://*.newsweek.com/*",
-    "*://*.redstate.com/*",
     "*://*.politico.com/*",
     "*://*.americanthinker.com/*",
     "*://*.metalsucks.net/*",
@@ -278,6 +279,7 @@ const ArchiveURLS =  [
     "*://*.clickhole.com/*",
     "*://*.sputniknews.com/*",
     "*://*.mercurynews.com/*",
+    "*://*.bostonherald.com/*",
     "*://*.almatcboykin.wordpress.com/*"
 ];
 const archiverDomains = [
@@ -366,13 +368,13 @@ chrome.webRequest.onBeforeRequest.addListener(
     ['blocking']
 );*/
 
-// archive via outline.com
+// archive using outline.com
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         if(filter_list_state === 2 || filter_list_state === 3) { return }
         const url = details.url;
 
-        return archiveOutlineConstructor(url);
+        return outlineConstructor(url);
     },
     {
         urls: OutlineURLS,
@@ -412,12 +414,20 @@ function archiveUnvConstructor(url) {
     return { redirectUrl: finalUrl };
 }
 
+// SLATED FOR REMOVAL
 // build the archive.is request url using outline.com
 function archiveOutlineConstructor(url) {
     const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=https://outline.com/';
     const finalUrl = archiver + url;
 
     return { redirectUrl: finalUrl };
+}
+
+function outlineConstructor(url) {
+    const archiver = 'https://outline.com/';
+    const finalUrl = archiver + url;
+
+    return { redirectUrl: finalUrl}
 }
 
 // Build the archive.is request url
