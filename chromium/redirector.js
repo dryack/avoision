@@ -112,7 +112,8 @@ const TRACKERS_BY_ROOT = {
         'sl',
         'tpl',
         'mp',
-        'trkid'
+        'trkid',
+        'unlock'
     ]
 };
 const MISC_FOR_CLEANING = [
