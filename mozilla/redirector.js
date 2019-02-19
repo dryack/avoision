@@ -296,13 +296,23 @@ function cleaning(details){
     let url = details.url;
 
     // deal with reddit
-    const redditRegex = new RegExp(/(reddit\.com)/);
-    const oldRedditRegex = new RegExp(/(old\.reddit\.com)/);
+    const redditRegex = new RegExp(/(^http(s)?:\/\/(www\.)?reddit\.com)/);
+    const oldRedditRegex = new RegExp(/^http(s)?:\/\/(old\.reddit\.com)/);
+    const outRedditRegex = new RegExp(/^http(s)?:\/\/(out\.reddit\.com)/);
+
     if (url.match(oldRedditRegex)) if (url.endsWith('/')) {
+        console.debug("oldReddit fired)");
         return
     }
 
+    if (url.match(outRedditRegex)) {
+        console.debug("outReddit fired");
+        console.debug(`original url: ${url}`);
+        url = stripRedditOutLink(url)
+    }
+
     if (!url.match(oldRedditRegex)) if (url.match(redditRegex)) {
+        console.debug("badReddit can fuck off");
         url = oldReddit(url);
     }
 
@@ -402,9 +412,20 @@ function oldReddit(redditUrl) {
     return redditUrl.replace(REDDIT_URL, "$1old.$3");
 }
 
+function stripRedditOutLink(redditUrl) {
+    const REDDIT_URL = new RegExp(/(^https?:\/\/out\.reddit\.com\/.*\??url=)(https?.+?)(&.*)/);
+    let intermediateUrl = redditUrl.replace(REDDIT_URL, "$2");
+    console.debug(`intermediate url: ${intermediateUrl}`);
+    intermediateUrl = intermediateUrl.replace(/%3A/g, ":");
+    console.debug(`intermediate url: ${intermediateUrl}`);
+    let finalUrl = intermediateUrl.replace(/%2F/g, "/");
+    console.debug(`final url: ${finalUrl}`);
+    return finalUrl;
+}
+
 // build the archive.is request url using via.hypothes.is
 function archiveViaConstructor(url) {
-    const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=https://via.hypothes.is/';
+    const archiver = `https://${pickArchiver(archiverDomains)}/?run=1&url=https://via.hypothes.is/`;
     const finalUrl = archiver + url;
 
     return { redirectUrl: finalUrl };
@@ -412,7 +433,7 @@ function archiveViaConstructor(url) {
 
 // build the archive.is request url using unv.is
 function archiveUnvConstructor(url) {
-    const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=https://unv.is/';
+    const archiver = `https://${pickArchiver(archiverDomains)}/?run=1&url=https://unv.is/`;
     const finalUrl = archiver + url.replace(/(http|https):\/\//, '');
 
     return { redirectUrl: finalUrl };
@@ -421,7 +442,7 @@ function archiveUnvConstructor(url) {
 // SLATED FOR REMOVAL
 // build the archive.is request url using outline.com
 function archiveOutlineConstructor(url) {
-    const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=https://outline.com/';
+    const archiver = `https://${pickArchiver(archiverDomains)}/?run=1&url=https://outline.com/`;
     const finalUrl = archiver + url;
 
     return { redirectUrl: finalUrl };
@@ -436,7 +457,7 @@ function outlineConstructor(url) {
 
 // Build the archive.is request url
 function archiveUrlConstructor(url){
-    const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=';
+    const archiver = `https://${pickArchiver(archiverDomains)}/?run=1&url=`;
 
     // pjmedia crap
     const pjmedia_singlepage = '?singlepage=true'; // avoid the irritating More button
@@ -462,7 +483,7 @@ for (let root in TRACKERS_BY_ROOT) {
     // Old way, matching at the end 1 or unlimited times.
     // TRACKER_REGEXES_BY_ROOT[root] = new RegExp("((^|&)" + root + "(" + TRACKERS_BY_ROOT[root].join('|') + ")=[^&#]+)", "ig");
     // New way, matching at the end 0 or unlimited times. Hope this doesn't come back to be a problem.
-    TRACKER_REGEXES_BY_ROOT[root] = new RegExp("((^|&)" + root + "(" + TRACKERS_BY_ROOT[root].join('|') + ")=[^&#]*)", "ig");
+    TRACKER_REGEXES_BY_ROOT[root] = new RegExp(`((^|&)${root}(${TRACKERS_BY_ROOT[root].join('|')})=[^&#]*)`, "ig");
 }
 
 // Generate the URL patterns used for webRequest filtering
@@ -471,7 +492,7 @@ function generateTrackerPatternsArray(TRACKERS_BY_ROOT) {
     const array = [];
     for (let root in TRACKERS_BY_ROOT) {
         for (let i=0; i < TRACKERS_BY_ROOT[root].length; i++) {
-            array.push( "*://*/*?*" + root + TRACKERS_BY_ROOT[root][i] + "=*" );
+            array.push( `*://*/*?*${root}${TRACKERS_BY_ROOT[root][i]}=*` );
         }
     }
     for (let i in MISC_FOR_CLEANING) {
