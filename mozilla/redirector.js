@@ -301,18 +301,18 @@ function cleaning(details){
     const outRedditRegex = new RegExp(/^http(s)?:\/\/(out\.reddit\.com)/);
 
     if (url.match(oldRedditRegex)) if (url.endsWith('/')) {
-        console.debug("oldReddit fired)");
+        //console.debug("oldReddit fired)");
         return
     }
 
     if (url.match(outRedditRegex)) {
-        console.debug("outReddit fired");
-        console.debug(`original url: ${url}`);
+        //console.debug("outReddit fired");
+        //console.debug(`original url: ${url}`);
         url = stripRedditOutLink(url)
     }
 
     if (!url.match(oldRedditRegex)) if (url.match(redditRegex)) {
-        console.debug("badReddit can fuck off");
+        //console.debug("badReddit can fuck off");
         url = oldReddit(url);
     }
 
@@ -415,11 +415,11 @@ function oldReddit(redditUrl) {
 function stripRedditOutLink(redditUrl) {
     const REDDIT_URL = new RegExp(/(^https?:\/\/out\.reddit\.com\/.*\??url=)(https?.+?)(&.*)/);
     let intermediateUrl = redditUrl.replace(REDDIT_URL, "$2");
-    console.debug(`intermediate url: ${intermediateUrl}`);
+    //console.debug(`intermediate url: ${intermediateUrl}`);
     intermediateUrl = intermediateUrl.replace(/%3A/g, ":");
-    console.debug(`intermediate url: ${intermediateUrl}`);
+    //console.debug(`intermediate url: ${intermediateUrl}`);
     let finalUrl = intermediateUrl.replace(/%2F/g, "/");
-    console.debug(`final url: ${finalUrl}`);
+    //console.debug(`final url: ${finalUrl}`);
     return finalUrl;
 }
 
