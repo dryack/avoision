@@ -140,6 +140,7 @@ const UnvisURLS = [];
 const OutlineURLS = [
     "*://*.aclu.org/*",
     "*://*.thecollegefix.com/*",
+    "*://*.wbir.com/*",
     "*://*.sfchronicle.com/*"
 ];
 const ArchiveURLS =  [
@@ -280,6 +281,11 @@ const ArchiveURLS =  [
     "*://*.sputniknews.com/*",
     "*://*.mercurynews.com/*",
     "*://*.bostonherald.com/*",
+    "*://*.out.com/*",
+    "*://*.thehill.com/*",
+    "*://*.vanityfair.com/*",
+    "*://*.dailywire.com/*",
+    "*://*.dailystar.co.uk/*",
     "*://*.almatcboykin.wordpress.com/*"
 ];
 const archiverDomains = [
