@@ -43,7 +43,7 @@ function sendViaUnvis(info) {
 }
 
 function sendViaOutline(info) {
-    const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=https://outline.com/';
+    const archiver = 'https://outline.com/';
     const url = archiver + info.pageUrl;
 
     chrome.tabs.create({

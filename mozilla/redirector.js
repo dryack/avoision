@@ -113,7 +113,8 @@ const TRACKERS_BY_ROOT = {
         'tpl',
         'mp',
         'trkid',
-        'unlock'
+        'unlock',
+        'mkt_tok'
     ]
 };
 const MISC_FOR_CLEANING = [
@@ -131,21 +132,29 @@ const ViaURLS = [
     "*://*.massivelyop.com/*",
     "*://*.washingtonexaminer.com/*",
     "*://*.fortune.com/*",
-    "*://*.bloomberg.com/*",
     "*://*.usatoday.com/*",
     "*://*.redstate.com/*",
+    "*://*.sfchronicle.com/*",
+    "*://*.bostonherald.com/*",
     "*://*.wired.com/*"
 ];
 const UnvisURLS = [];
 const OutlineURLS = [
     "*://*.aclu.org/*",
     "*://*.thecollegefix.com/*",
-    "*://*.wbir.com/*",
-    "*://*.sfchronicle.com/*"
+    "*://*.wbir.com/*"
 ];
 const ArchiveURLS =  [
     "*://*.washingtonpost.com/*",
     "*://*.theatlantic.com/*",
+    "*://*.newyork.cbslocal.com/*",
+    "*://*.jewishworldreview.com/*",
+    "*://*.tvblackbox.com.au/*",
+    "*://*.kcentv.com/*",
+    "*://*.cjr.org/*",
+    "*://*.morningstaronline.co.uk/*",
+    "*://*.denverpost.com/*",
+    "*://*.bloomberg.com/*",
     "*://*.eurogamer.net/*",
     "*://*.gunsinthenews.com/*",
     "*://*.flagandcross.com/*",
@@ -280,7 +289,6 @@ const ArchiveURLS =  [
     "*://*.clickhole.com/*",
     "*://*.sputniknews.com/*",
     "*://*.mercurynews.com/*",
-    "*://*.bostonherald.com/*",
     "*://*.out.com/*",
     "*://*.thehill.com/*",
     "*://*.vanityfair.com/*",

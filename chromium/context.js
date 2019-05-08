@@ -13,7 +13,6 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-
 function sendToArchiver(info) {
     const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=';
     const url = archiver + info.pageUrl;
@@ -44,7 +43,7 @@ function sendViaUnvis(info) {
 }
 
 function sendViaOutline(info) {
-    const archiver = 'https://' + pickArchiver(archiverDomains) + '/?run=1&url=https://outline.com/';
+    const archiver = 'https://outline.com/';
     const url = archiver + info.pageUrl;
 
     chrome.tabs.create({
